@@ -12,7 +12,7 @@ L'événement débutera du jeudi 31 mars à 9h, jusqu'au vendredi 01 avril 12h (
 
 ### Consignes
 Vous devez rendre votre projet fait avec Angular pour le vendredi 12h, heure du dernier commit sur **gitlab de l'université** faisant foi.
-Vous présenterez votre projet et son concept ainsi à partir de vendredi 14h.
+Vous présenterez votre projet et son concept lors d'une présentation commerciale à partir de vendredi 14h.
 
 ### Les capitaines
 
@@ -29,7 +29,7 @@ C'est votre dossier principal de travail pour cet événement. Libre à vous d'y
 
 Dans le dossier `server`, vous trouverez un projet minimal d'API construit avec [Strapi](https://strapi.io/). Il vous permettra d'avoir un peu de liberté quant aux entités et informations disponibles dans l'API.
 
-⚠️ Vous n'avez pas spécialement à coder dans cette partie là. Strapi a été choisi car, vous le verrez plus bas, il vous permet de créer des routes, entités et champs facilement au travers d'une interface d'administration. 
+⚠️ Vous n'avez pas spécialement à coder dans cette partie là. Strapi a été choisi car, vous le verrez plus bas, il vous permet de créer des routes, entités et champs facilement au travers d'une interface d'administration. Le but reste de développer votre application Angular ! Si vous n'avez pas optimisé, protégé ou gérer vos profils de privilèges/routes/entités, ce n'est pas grave !
 
 L'API est en NodeJS avec une base SQLite contenue dans le fichier `./tmp/data.db`. Ne le modifiez pas à la main !
 Lorsque vous ajouterez des entités, champs, etc... il vous sera nécessaire de commit et push vos modifications sur votre repository de projet afin de le partager aux autres développeurs de votre équipe.
@@ -66,3 +66,12 @@ Lancez le client :
 ```
 Vous savez faire 😉
 ```
+
+## Disclaimer
+
+Vous pouvez à tout moment demander de l'aide que ce soit pour débugger votre app Angular ou votre API.
+
+# HAVE FUN !
+
+
+20h: tier list meilleure sauce avec des pâtes ?
