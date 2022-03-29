@@ -37,8 +37,6 @@ Lorsque vous ajouterez des entités, champs, etc... il vous sera nécessaire de 
 - Lien de la documentation OpenAPI: http://localhost:1337/documentation/v1.0.0
 - Endpoint de base: http://localhost:1337/api
 
-----
-
 ## Getting Started
 
 Clonez ce projet : 
