@@ -34,6 +34,7 @@ Dans le dossier `server`, vous trouverez un projet minimal d'API construit avec 
 L'API est en NodeJS avec une base SQLite contenue dans le fichier `./tmp/data.db`. Ne le modifiez pas à la main !
 Lorsque vous ajouterez des entités, champs, etc... il vous sera nécessaire de commit et push vos modifications sur votre repository de projet afin de le partager aux autres développeurs de votre équipe.
 
+- Lien de l'administration: http://localhost:1337/admin
 - Lien de la documentation OpenAPI: http://localhost:1337/documentation/v1.0.0
 - Endpoint de base: http://localhost:1337/api
 
