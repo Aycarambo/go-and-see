@@ -67,6 +67,31 @@ Lancez le client :
 Vous savez faire 😉
 ```
 
+## Utiliser Strapi
+
+Dans l'interface d'administration de Strapi, il faut distinguer 2 parties différentes: le Contenu et le Content-Type Builder.
+
+Le **contenu** est simplement la donnée présente dans votre API: un patient, un utilisateur, une visite, etc... qui est administrable. Création, modification, suppresion, vous pouvez faire tout ce qu'un CMS classique peut faire.
+
+Le **Content-Type Builder** est la partie où vous configurez vos entités, ces champs, ses relations, etc...
+Exemple, je peux créer un type de contenu Patient, qui a plusieurs champs: nom, prénom, date de naissance, ... N'hésitez pas à parcours tous les choix de champs proposés par Strapi et notamment les Relations.
+
+Les **Relations** sont un type de champs qui lie de différentes manières 2 entités entre-elles. Ex: Un patient a plusieurs traitements. Une tournée a plusieurs patients.
+
+Les **Singles Types** sont un type de contenu dont vous n'aurez pas spécialement besoin. Il s'agit d'élément à caractère unique, homepage, footer par exemple, très utile dans le cas où Strapi vous sert de templating CMS complet (comme WordPress).
+
+Les **Components** sont des groupes de champs répétables qui ne sont pas lié à des entités.
+
+Vous avez également accès à une **médiathèque** pour gérer les assets de vos entités.
+
+### Gérer les droits
+
+Strapi s'accompagne d'une gestion des profils de profils de privilèges simplifié afin de sécuriser (ou non) votre API rapidement.
+
+Dans Paramètres > Users Permissions, vous trouverez par défaut 2 profils: Authenticated et Public.
+Pour chaque profil, vous pouvez choisir quelles sont les actions possibles pour chaque entité de votre API.
+
+Vous pouvez donc gérer de l'inscription et de l'authenfication de nouvel utilisateur sur votre futur app ;)
 ## Disclaimer
 
 Vous pouvez à tout moment demander de l'aide que ce soit pour débugger votre app Angular ou votre API.
