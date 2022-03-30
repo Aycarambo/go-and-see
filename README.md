@@ -6,11 +6,11 @@ Voici le boilerplate de votre projet.
 ## Thematique
 Fort de son implémentation cotière, La Rochelle offre un cadre idéal aux disciplines nautiques, notamment la voile. Avant d'atteindre le niveau professionnel, bons nombres d'associations et de projets bénévoles se développement dans le monde de la voile mais ne sont pas forcément équipés numériquement pour gérer et administrer l'ensemble des acteurs du nautisme Rochelais.
 
-Par équipe mixtes DFS/WDI, vous devez développer un produit/une application/un site/un outils, autour du monde de la voile.
-
-L'événement débutera du jeudi 31 mars à 9h, jusqu'au vendredi 01 avril 12h (heure du dernier commit) sans interuption pour la partie projet. Le vendredi à 14h débutera la présentation des dits-projets.
+Par équipe mixtes DFS/WDI, vous devez développer un produit/une application/un site/un outils, dans le domaine de la voile et son écosystème.
 
 ### Consignes
+L'événement débutera du jeudi 31 mars à 9h, jusqu'au vendredi 01 avril 12h sans interuption pour la partie projet. Le vendredi à 14h débutera la présentation des dits-projets.
+
 Vous devez rendre votre projet fait avec Angular pour le vendredi 12h, heure du dernier commit sur **gitlab de l'université** faisant foi.
 Vous présenterez votre projet et son concept lors d'une présentation commerciale à partir de vendredi 14h.
 
@@ -43,7 +43,7 @@ Lorsque vous ajouterez des entités, champs, etc... il vous sera nécessaire de 
 Clonez ce projet : 
 ```
 git clone https://gitlab.univ-lr.fr/vkraus/hackangular-2022
-cd hackanhular-2022/
+cd hackangular-2022/
 ```
 
 Créer un projet sur le gitlab de l'université, puis ajouter la remote au projet.
@@ -96,7 +96,7 @@ Vous pouvez donc gérer de l'inscription et de l'authenfication de nouvel utilis
 
 Vous pouvez à tout moment demander de l'aide que ce soit pour débugger votre app Angular ou votre API.
 
-# HAVE FUN !
+# ENJOY 🎉
 
 
 20h: tier list meilleure sauce avec des pâtes ?
