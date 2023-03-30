@@ -1,0 +1,12 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <input formControlName="username" type="text" name="id" placeholder="login" />
+    <input formControlName="password" name="pwd" placeholder="password" />
+
+    <button type="submit" class="btn btn-primary mt-4">
+        Se connecter
+    </button>
+</form>
+
+<button (click)="onLogout()" class="btn btn-primary mt-4">
+    déconnexion
+</button>
