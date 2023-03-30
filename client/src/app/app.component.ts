@@ -9,7 +9,7 @@ import { arene } from "./model/arenes";
   styles: [],
 })
 export class AppComponent {
-  title = "Goo & See";
+  title = "Go & See";
   arenes: arene[] = [];
 
   constructor(private arenesService: ArenesService) {
