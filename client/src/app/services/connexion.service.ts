@@ -38,7 +38,9 @@ export class connexionService {
       Authorization: `Bearer ${this.getToken()}`,
     });
 
-    return this.http.get(`${environment.apiUrl}/users/me`, { headers });
+    return this.http.get(`${environment.apiUrl}/users/me?populate=*`, {
+      headers,
+    });
   }
 
   setToken(token: string) {

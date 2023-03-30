@@ -1,5 +1,5 @@
 import { connexionService } from "src/app/services/connexion.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "app-header",
@@ -7,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styles: [],
 })
 export class HeaderComponent implements OnInit {
+  @Input() backButton: boolean = true;
   credits = null;
   points = null;
   constructor(private connexionService: connexionService) {}

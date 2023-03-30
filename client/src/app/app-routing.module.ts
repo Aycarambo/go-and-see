@@ -31,6 +31,7 @@ const routes: Routes = [
   {
     path: "",
     component: BonAchatsComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
