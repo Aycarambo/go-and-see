@@ -4,7 +4,8 @@
   "info": {
     "singularName": "arene",
     "pluralName": "arenes",
-    "displayName": "arene"
+    "displayName": "arene",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,10 +21,10 @@
     "long": {
       "type": "float"
     },
-    "joueur_actif": {
+    "joueurActif": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "admin::user"
+      "target": "plugin::users-permissions.user"
     },
     "dateCapture": {
       "type": "datetime"
