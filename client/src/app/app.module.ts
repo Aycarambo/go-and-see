@@ -8,6 +8,7 @@ import { BonAchatComponent } from "./components/bon-achat/bon-achat.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MapComponent } from "./pages/map/map.component";
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { MapComponent } from "./pages/map/map.component";
     BonAchatComponent,
     MapComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
