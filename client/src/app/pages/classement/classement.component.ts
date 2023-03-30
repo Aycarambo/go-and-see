@@ -9,7 +9,7 @@ import { joueur } from "src/app/model/joueur";
   styleUrls: ["./classement.component.scss"],
 })
 export class ClassementComponent implements OnInit {
-  joueurs: joueur[] = [];
+  joueurs: any;
 
   constructor(private playerService: PlayersService) {}
 
@@ -20,6 +20,9 @@ export class ClassementComponent implements OnInit {
   getPlayersSorted() {
     this.playerService.getPlayersSorted().subscribe((response: joueur[]) => {
       this.joueurs = response;
+      console.log(this.joueurs)
     });
   }
+
+  
 }

@@ -13,10 +13,10 @@
                 *ngFor="let joueur of joueurs">
                 <img src="../../../assets/images/trophee-1er.svg" alt="">
                 <div class="justify-self-center">
-                    <p class="font-semibold"></p>
+                    <p class="font-semibold">{{joueur.login}}</p>
                     <p class="text-xs text-blue">Matelot</p>
                 </div>
-                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span
+                <p class="flex gap-1 text-xs items-center justify-self-end">{{joueur.points}} <span
                         class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
                         <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
                     </span></p>
