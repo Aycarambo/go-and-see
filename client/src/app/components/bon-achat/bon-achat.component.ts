@@ -1,3 +1,5 @@
+import { connexionService } from "./../../services/connexion.service";
+import { bonAchatService } from "src/app/services/bon-achat.service";
 import { Component, OnInit, Input } from "@angular/core";
 import { bonAchat } from "src/app/model/bonAchat";
 
@@ -8,13 +10,24 @@ import { bonAchat } from "src/app/model/bonAchat";
 })
 export class BonAchatComponent implements OnInit {
   @Input() bonAchat: bonAchat;
+  @Input() credits: number = 0;
 
-  credits: number = 100;
-  constructor() {}
+  constructor(
+    private bonAchatService: bonAchatService,
+    private connexionService: connexionService
+  ) {}
 
   ngOnInit(): void {}
 
-  subCredits(prix: number) {
-    this.credits - prix >= 0 ? (this.credits -= prix) : "";
+  hasEnoughCredits(): boolean {
+    return this.credits - this.bonAchat.prix >= 0;
+  }
+
+  acheterBonAchat() {
+    if (this.hasEnoughCredits()) {
+      this.connexionService.susbstractFromCredits(this.bonAchat.prix);
+    } else {
+      console.log("Pas assez de crédits");
+    }
   }
 }

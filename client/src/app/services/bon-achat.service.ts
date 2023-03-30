@@ -1,3 +1,4 @@
+import { connexionService } from "src/app/services/connexion.service";
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
@@ -21,6 +22,23 @@ export class bonAchatService {
         return this.buildbonAchat(fields);
       })
     );
+  }
+
+  getBonAchat(id: number) {
+    return this.http
+      .get(`${environment.apiUrl}/${this.bonAchatPath}/${id}`)
+      .pipe(
+        map((data: any) => data.data),
+        map((data: any) => {
+          const bonAchat: bonAchat = {
+            id: data.id,
+            description: data.attributes.description,
+            pourcentage: data.attributes.pourcentageReduction,
+            prix: data.attributes.prixEnCredits,
+          };
+          return bonAchat;
+        })
+      );
   }
 
   buildbonAchat(fields: any): bonAchat[] {

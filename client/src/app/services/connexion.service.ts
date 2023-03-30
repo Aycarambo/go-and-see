@@ -43,6 +43,16 @@ export class connexionService {
     });
   }
 
+  susbstractFromCredits(price: number) {
+    return this.me().pipe((data: any) => {
+      const credits = data.credits;
+      const userId = data.id;
+      return this.http.put(`${environment.apiUrl}/users/${userId}`, {
+        credits: credits - price,
+      });
+    });
+  }
+
   setToken(token: string) {
     this.token = token;
     localStorage.setItem("auth_token", token);
