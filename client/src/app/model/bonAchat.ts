@@ -1,6 +1,6 @@
 export interface bonAchat {
   id: number;
-  nom: string;
+  description: string;
   pourcentage: number;
   prix: number;
 }
