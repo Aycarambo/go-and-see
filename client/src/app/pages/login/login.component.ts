@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-
+import { Router } from "@angular/router";
 import { connexionService } from "src/app/services/connexion.service";
 
 @Component({
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private connexionService: connexionService
+    private connexionService: connexionService,
+    private router: Router
   ) {}
 
   get username() {
@@ -33,6 +34,8 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.succeed = true;
+        this.router.navigate(["/home"]);
+
         setTimeout(() => {
           this.succeed = false;
         }, 3000);
@@ -48,6 +51,10 @@ export class LoginComponent implements OnInit {
         }, 3000);
       },
     });
+  }
+
+  onLogout() {
+    this.connexionService.logout();
   }
 
   ngOnInit(): void {}

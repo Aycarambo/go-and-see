@@ -49,13 +49,18 @@ export class CalculDistanceComponent implements OnInit {
 
     const R = 6371; // Rayon de la Terre en km
     const dLat = this.degreesToRadians(arena.lat - this.userPosition.latitude);
-    const dLon = this.degreesToRadians(arena.long - this.userPosition.longitude);
+    const dLon = this.degreesToRadians(
+      arena.long - this.userPosition.longitude
+    );
     const a =
       Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(this.degreesToRadians(this.userPosition.latitude)) * Math.cos(this.degreesToRadians(arena.lat)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      Math.cos(this.degreesToRadians(this.userPosition.latitude)) *
+        Math.cos(this.degreesToRadians(arena.lat)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    this.distance = (R * c);
+    this.distance = R * c;
     this.distance = Math.round(this.distance * 100) / 100;
   }
 
@@ -64,11 +69,11 @@ export class CalculDistanceComponent implements OnInit {
       if (this.selectedArena) {
         this.calculateDistance(this.selectedArena);
       }
-    }, 300000); 
+    }, 300000);
   }
 
   stopInterval() {
-    clearInterval(this.intervalId); 
+    clearInterval(this.intervalId);
   }
 
   degreesToRadians(degrees: number): number {
