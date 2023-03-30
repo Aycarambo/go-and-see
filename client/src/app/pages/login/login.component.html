@@ -1,26 +1,32 @@
-<main class="flex flex-col h-screen py-8">
-    <div class="mt-20">
-        <header>
-            <h1 class="headings mb-2">
-                A l’abordage !
-            </h1>
-            <p>
-                Vite moussaillon, connecte-toi,<br>
-                nous t’attendons en mer.
-            </p>
-        </header>
+<div class="wrapper h-screen">
+    <main class="flex flex-col py-8 h-full">
+        <div class="mt-20">
+            <header>
+                <h1 class="headings mb-2">
+                    A l’abordage !
+                </h1>
+                <p>
+                    Vite moussaillon, connecte-toi,<br>
+                    nous t’attendons en mer.
+                </p>
+            </header>
 
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col mt-8">
-            <input formControlName="username" type="text" name="id" placeholder="Login du voilier"
-                class="bg-white shadow p-4 rounded-full mb-2" />
-            <input formControlName="password" name="pwd" placeholder="Mot de passe"
-                class="bg-white shadow p-4 rounded-full" />
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col mt-8">
+                <input formControlName="username" type="text" name="id" placeholder="Login du voilier"
+                    class="bg-white shadow p-4 rounded-full mb-2" />
+                <input formControlName="password" name="pwd" placeholder="Mot de passe"
+                    class="bg-white shadow p-4 rounded-full" />
 
-            <button type="submit" class="btn mt-8">
-                Connexion
-            </button>
-        </form>
-    </div>
+                <button type="submit" class="btn mt-8">
+                    Connexion
+                </button>
 
-    <img src="../../../assets/images/logo-icon.png" alt="" class=" h-14 w-14 mx-auto mt-auto">
-</main>
+                <button type="button" class="btn mt-8" (click)="onLogout()">
+                    deco
+                </button>
+            </form>
+        </div>
+
+        <img src="../../../assets/images/logo-icon.png" alt="" class=" h-14 w-14 mx-auto mt-auto">
+    </main>
+</div>

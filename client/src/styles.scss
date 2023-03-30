@@ -39,6 +39,10 @@ body {
   box-shadow: 0px -2px 24px rgba(0, 0, 0, 0.05);
 }
 
+.small-shadow {
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.1);
+}
+
 .btn {
   @apply bg-blue text-white font-medium text-base	rounded-full border-none px-4 w-full;
   &:focus {
@@ -54,4 +58,17 @@ input {
   &:focus {
     @apply outline-blue;
   }
+}
+
+.marker,
+.marker-arene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: block;
+  background-image: url("./assets/images/marker.svg");
+  background-size: contain;
+  width: 8rem;
+  height: 8rem;
 }

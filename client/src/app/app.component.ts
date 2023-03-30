@@ -10,7 +10,7 @@ import { bonAchat } from "./model/bonAchat";
   styles: [],
 })
 export class AppComponent {
-  title = "Goo & See";
+  title = "Go & See";
   bonAchats: bonAchat[] = [];
 
   constructor(private bonAchatService: bonAchatService) {
