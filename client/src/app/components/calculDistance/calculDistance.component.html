@@ -1,0 +1,23 @@
+<div class="container">
+
+   <div>
+      <ul>
+         <li *ngFor="let arene of arenes" (click)="calculateDistance(arene)" [class.active]="arene === selectedArena">
+            {{ arene.nom }}
+         </li>
+      </ul>
+   </div>
+
+   <div *ngIf="selectedArena">
+      <figure>
+         <img src="" alt="">
+         <figcaption>
+            <h3>Direction {{ selectedArena.nom }}</h3>
+            <p>{{ selectedArena.lat }}</p>
+            <p>{{ selectedArena.long }}</p>
+            <p *ngIf="distance"> {{ distance }}km</p>
+         </figcaption>
+      </figure>
+   </div>
+
+</div>

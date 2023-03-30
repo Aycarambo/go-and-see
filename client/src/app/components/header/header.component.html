@@ -1,0 +1,22 @@
+<header class="flex items-center justify-between pt-10 mb-10">
+    <div class="flex gap-2">
+        <app-round-button *ngIf="backButton"></app-round-button>
+        <app-round-button *ngIf="!backButton" [iconSource]="'../../../assets/images/parametres.svg'"></app-round-button>
+        <app-round-button *ngIf="!backButton"
+            [iconSource]="'../../../assets/images/deconnexion.svg'"></app-round-button>
+    </div>
+    <div class="flex">
+        <span class="mr-1">
+            {{ points }}
+        </span>
+        <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow mr-4">
+            <img src="../../../assets/images/voile.svg" alt="" class="h-2.5 w-2.5" />
+        </span>
+        <span class="mr-1">
+            {{ credits }}
+        </span>
+        <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+            <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5 w-2.5" />
+        </span>
+    </div>
+</header>
