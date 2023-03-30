@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { ApiService } from "src/app/services/api.service";
-import { Arene } from "src/app/models/arenes";
+import { ApiService } from "src/app/services/api.arenes";
+import { arene } from "src/app/models/arenes";
 
 @Component({
   selector: "calcul-distance",
@@ -8,16 +8,16 @@ import { Arene } from "src/app/models/arenes";
   styleUrls: ["./calculDistance.component.scss"],
 })
 export class calculDistanceComponent implements OnInit {
-  arenes: Arene[] = [];
+  arenes: arene[] = [];
 
   constructor(private apiService: ApiService) {}
 
   ngOnInit(): void {
-    this.getPatients();
+    this.getArene();
   }
 
-  getArenes() {
-    this.apiService.getPatients().subscribe((response: Arenes[]) => {
+  getArene() {
+    this.apiService.getPatients().subscribe((response: arene[]) => {
       this.arenes = response;
     });
   }
