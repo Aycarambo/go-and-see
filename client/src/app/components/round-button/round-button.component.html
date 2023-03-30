@@ -1,0 +1,13 @@
+<span
+    class="grid items-center justify-center rounded-full bg-white small-shadow"
+    [ngClass]="{ 'h-12 w-12': size === 'medium', 'h-14 w-14': size === 'big' }"
+>
+    <img
+        src="{{ iconSource }}"
+        alt=""
+        [ngClass]="{
+            'h-5 w-5': size === 'medium',
+            'h-8 w-8': size === 'big'
+        }"
+    />
+</span>
