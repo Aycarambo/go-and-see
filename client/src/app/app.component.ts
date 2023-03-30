@@ -1,7 +1,8 @@
+import { bonAchatService } from "src/app/services/bon-achat.service";
 import { Component } from "@angular/core";
 
-import { ArenesService } from "./services/arenes.service";
 import { arene } from "./model/arenes";
+import { bonAchat } from "./model/bonAchat";
 
 @Component({
   selector: "app-root",
@@ -10,11 +11,11 @@ import { arene } from "./model/arenes";
 })
 export class AppComponent {
   title = "Goo & See";
-  arenes: arene[] = [];
+  bonAchats: bonAchat[] = [];
 
-  constructor(private arenesService: ArenesService) {
-    this.arenesService.getArenes().subscribe((arenes) => {
-      this.arenes = arenes;
+  constructor(private bonAchatService: bonAchatService) {
+    this.bonAchatService.getBonAchats().subscribe((bonAchats) => {
+      this.bonAchats = bonAchats;
     });
   }
 }
