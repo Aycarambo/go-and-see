@@ -1,17 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@angular/forms";
-
 import { ApiService } from "src/app/services/api.service";
-import { Arene } from "src/app/models/arene";
+import { Arene } from "src/app/models/arenes";
 
 @Component({
   selector: "calcul-distance",
-  templateUrl: "./patients.component.html",
-  styleUrls: ["./patients.component.scss"],
+  templateUrl: "./calculDistance.component.html",
+  styleUrls: ["./calculDistance.component.scss"],
 })
-export class PatientsComponent implements OnInit {
-  patients: Patient[] = [];
-  name = new FormControl("");
+export class calculDistanceComponent implements OnInit {
+  arenes: Arene[] = [];
 
   constructor(private apiService: ApiService) {}
 
@@ -19,19 +16,10 @@ export class PatientsComponent implements OnInit {
     this.getPatients();
   }
 
-  getPatients() {
-    this.apiService.getPatients().subscribe((response: Patient[]) => {
-      this.patients = response;
+  getArenes() {
+    this.apiService.getPatients().subscribe((response: Arenes[]) => {
+      this.arenes = response;
     });
   }
 
-  searchPatients() {
-    Boolean(this.name.value)
-      ? this.apiService
-          .getSearchPatients(this.name.value)
-          .subscribe((response: Patient[]) => {
-            this.patients = response;
-          })
-      : this.getPatients();
-  }
 }
