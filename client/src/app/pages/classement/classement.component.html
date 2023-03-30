@@ -1,0 +1,86 @@
+<main class="classement flex flex-col gap-7 wrapper h-screen">
+    <header>
+        <h1 class="headings">
+            Classement
+        </h1>
+        <p>
+            Fin de Saison dans : 3j 5h 2min 30s
+        </p>
+    </header>
+    {{ players }}
+    <section>
+        <ul class="shadow rounded-3xl px-4 py-2 bg-white">
+            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white" *ngFor="let player of players">
+                <img src="../../../assets/images/trophee-1er.svg" alt="">
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white">
+                <img src="../../../assets/images/trophee-2e.svg" alt="">
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white">
+                <img src="../../../assets/images/trophee-3e.svg" alt="">
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white">
+                <p class="font-bold text-base">1<sup>er</sup></p>
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white">
+                <p class="font-bold text-base">1<sup>er</sup></p>
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white">
+                <p class="font-bold text-base">1<sup>er</sup></p>
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            <li class="grid-classement justify-between items-center py-2 bg-white">
+                <p class="font-bold text-base">156<sup>ème</sup></p>
+                <div class="justify-self-center">
+                    <p class="font-semibold">Jean Michel</p>
+                    <p class="text-xs text-blue">Matelot</p>
+                </div>
+                <p class="flex gap-1 text-xs items-center justify-self-end">500 <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                </span></p>
+            </li>
+            
+        </ul>
+    </section>
+</main>

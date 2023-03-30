@@ -5,6 +5,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { MapComponent } from "./pages/map/map.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
+import { ClassementComponent } from "./pages/classement/classement.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
 
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: "bons-achats",
     component: BonAchatsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "classement",
+    component: ClassementComponent,
     canActivate: [AuthGuard],
   },
 ];
