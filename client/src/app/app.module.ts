@@ -8,6 +8,7 @@ import { BonAchatComponent } from "./components/bon-achat/bon-achat.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MapComponent } from "./pages/map/map.component";
+import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MapComponent } from "./pages/map/map.component";
     LoginComponent,
     BonAchatComponent,
     MapComponent,
+    CalculDistanceComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [],
