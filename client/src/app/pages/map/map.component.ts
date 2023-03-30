@@ -18,7 +18,7 @@ export class MapComponent implements AfterViewInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.userLat = position.coords.latitude;
         this.userLong = position.coords.longitude;
-        
+
         const homeMap = new mapboxgl.Map({
           accessToken:
             "pk.eyJ1IjoiZ2xvcmVsIiwiYSI6ImNsZnYyaGhrMzAwOXYzZ2xpYmdyMTY4eXcifQ.MlyXT1DScZQ2RGqJL1PuIg",
@@ -27,12 +27,12 @@ export class MapComponent implements AfterViewInit {
           center: [this.userLong, this.userLat],
           zoom: 10,
         });
-        const el = document.createElement('div');
-        el.className = 'marker';
-          console.log(el)
-        new mapboxgl.Marker(el).setLngLat([this.userLong, this.userLat]).addTo(homeMap)
+        const el = document.createElement("div");
+        el.className = "marker";
+        new mapboxgl.Marker(el)
+          .setLngLat([this.userLong, this.userLat])
+          .addTo(homeMap);
       });
-      
     } else {
       alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
     }
