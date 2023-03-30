@@ -6,4 +6,5 @@ export interface joueur {
   credits: number;
   lat: number;
   long: number;
+  avatar?: any;
 }

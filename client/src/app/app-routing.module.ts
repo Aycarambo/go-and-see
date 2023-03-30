@@ -28,6 +28,12 @@ const routes: Routes = [
     component: BonAchatsComponent,
     canActivate: [AuthGuard],
   },
+
+  {
+    path: "dashboard",
+    component: BonAchatsComponent,
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
