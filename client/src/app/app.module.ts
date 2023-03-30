@@ -9,6 +9,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
+import { QrcodeComponent } from './pages/qrcode/qrcode.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CalculDistanceComponent } from "./components/calculDistance/calculDista
     LoginComponent,
     BonAchatComponent,
     MapComponent,
-    CalculDistanceComponent
+    CalculDistanceComponent,
+    QrcodeComponent
   ],
   imports: [BrowserModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [],
