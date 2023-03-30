@@ -14,6 +14,7 @@ import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { ClassementComponent } from "./pages/classement/classement.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AuthGuard } from "./guards/can-access.guard";
     RoundButtonComponent,
     MapComponent,
     CalculDistanceComponent,
+    ClassementComponent,
   ],
   imports: [
     BrowserModule,
