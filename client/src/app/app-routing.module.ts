@@ -7,6 +7,7 @@ import { LoginComponent } from "./pages/login/login.component";
 import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
     path: "",
     redirectTo: "/home",
     pathMatch: "full",
+  },
+  {
+    path: "dashboard",
+    component: Dashboard,
   },
   {
     path: "",
