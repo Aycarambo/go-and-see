@@ -1,32 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { joueur } from 'src/app/model/joueur';
-import { connexionService } from 'src/app/services/connexion.service';
-import { PlayersService } from 'src/app/services/player.service';
+import { Component, OnInit } from "@angular/core";
+import { PlayersService } from "src/app/services/player.service";
+
+import { joueur } from "src/app/model/joueur";
 
 @Component({
-  selector: 'app-classement',
-  templateUrl: './classement.component.html',
-  styleUrls: ['./classement.component.scss'],
+  selector: "app-classement",
+  templateUrl: "./classement.component.html",
+  styleUrls: ["./classement.component.scss"],
 })
 export class ClassementComponent implements OnInit {
-  connectedPlayer : joueur;
-  players : joueur[] = [];
-  constructor(private playerService : PlayersService, private connexionService : connexionService) { }
+  joueurs: joueur[] = [];
+
+  constructor(private playerService: PlayersService) {}
 
   ngOnInit(): void {
-    this.getConnectedPlayer();
-    this.getPlayers();
+    this.getPlayersSorted();
   }
 
-  getPlayers() {
+  getPlayersSorted() {
     this.playerService.getPlayersSorted().subscribe((response: joueur[]) => {
-      this.players = response;
-    });
-  }
-
-  getConnectedPlayer() {
-    this.connexionService.me().subscribe((response: any) => {
-      this.connectedPlayer = response;
+      this.joueurs = response;
     });
   }
 }

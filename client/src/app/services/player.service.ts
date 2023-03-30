@@ -9,35 +9,32 @@ import { map } from "rxjs";
   providedIn: "root",
 })
 export class PlayersService {
-  
   constructor(private http: HttpClient) {}
-
 
   getPlayersSorted() {
     return this.http.get(`${environment.apiUrl}/users?populate=*`).pipe(
-      map((data: any) => data.data),
+      map((data: any) => data),
       map((fields) => {
         return this.buildPlayers(fields);
       })
     );
   }
 
-
   buildPlayers(fields: any): joueur[] {
-    const players: joueur[] = [];
+    const joueurs: joueur[] = [];
+    console.log(fields);
 
     fields.forEach((field: any) => {
-      players.push({
+      joueurs.push({
         id: field.id,
-        login: field.attributes.login,
-        password: field.attributes.password,
-        points: field.attributes.points,
-        credits: field.attributes.credits,
-        lat: field.attributes.lat,
-        long: field.attributes.long,
+        login: field.username,
+        points: field.points,
+        credits: field.credits,
+        lat: field.lat,
+        long: field.long,
       });
     });
 
-    return players;
+    return joueurs;
   }
 }
