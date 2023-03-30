@@ -30,7 +30,7 @@ export class bonAchatService {
       console.log(field);
       bonAchats.push({
         id: field.id,
-        nom: field.attributes.nom,
+        description: field.attributes.description,
         pourcentage: field.attributes.pourcentageReduction,
         prix: field.attributes.prixEnCredits,
       });

@@ -14,11 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-<<<<<<< Updated upstream
-    "x-generation-date": "2023-03-30T13:20:16.875Z"
-=======
-    "x-generation-date": "2023-03-30T17:37:49.160Z"
->>>>>>> Stashed changes
+    "x-generation-date": "2023-03-30T19:03:08.683Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -2562,7 +2558,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               }
             }
@@ -2584,7 +2580,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
@@ -2903,7 +2899,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
@@ -3255,7 +3251,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
@@ -3574,7 +3570,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
