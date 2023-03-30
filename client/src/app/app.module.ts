@@ -12,8 +12,6 @@ import { HeaderComponent } from "./components/header/header.component";
 import { RoundButtonComponent } from "./components/round-button/round-button.component";
 import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
-import { ClassementComponent } from './pages/classement/classement.component';
-import { ClassementRowComponent } from './components/classement-row/classement-row.component';
 
 import { AuthGuard } from "./guards/can-access.guard";
 
@@ -27,8 +25,6 @@ import { AuthGuard } from "./guards/can-access.guard";
     RoundButtonComponent,
     MapComponent,
     CalculDistanceComponent,
-    ClassementComponent,
-    ClassementRowComponent,
   ],
   imports: [
     BrowserModule,
