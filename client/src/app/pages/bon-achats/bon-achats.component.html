@@ -1,0 +1,16 @@
+<main class="wrapper h-screen">
+    <header>
+        <h1 class="headings mb-2">
+            Bons de réductions
+        </h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur. Et lobortis vestibulum velit malesuada sit.
+        </p>
+    </header>
+
+    <ul class="flex flex-col gap-4 mt-8">
+        <li *ngFor="let bonAchat of bonsAchats">
+            <app-bon-achat [bonAchat]="bonAchat"></app-bon-achat>
+        </li>
+    </ul>
+</main>

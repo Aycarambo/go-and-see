@@ -4,7 +4,8 @@
   "info": {
     "singularName": "bon-achat",
     "pluralName": "bon-achats",
-    "displayName": "bonAchat"
+    "displayName": "bonAchat",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,8 +18,8 @@
     "prixEnCredits": {
       "type": "integer"
     },
-    "nom": {
-      "type": "string"
+    "description": {
+      "type": "text"
     }
   }
 }
