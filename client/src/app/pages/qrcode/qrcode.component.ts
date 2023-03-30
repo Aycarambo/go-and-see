@@ -31,7 +31,7 @@ export class QrcodeComponent implements OnInit {
     QRCode.toString(
       JSON.stringify(payload),
       {
-        errorCorrectionLevel: "H",
+        errorCorrectionLevel: "L",
         type: "svg",
         width: "100%",
         color: {
