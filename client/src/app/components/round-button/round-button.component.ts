@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class RoundButtonComponent implements OnInit {
   @Input() size: string = "medium";
-  @Input() iconSource: string = "../../../assets/images/cog.svg";
+  @Input() iconSource: string = "../../../assets/images/back.svg";
   constructor() {}
 
   ngOnInit(): void {}

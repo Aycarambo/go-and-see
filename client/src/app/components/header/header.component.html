@@ -1,7 +1,12 @@
 <header class="flex items-center justify-between pt-4">
     <div class="flex gap-2">
-        <app-round-button></app-round-button>
+        <app-round-button *ngIf="backButton"></app-round-button>
         <app-round-button
+            *ngIf="!backButton"
+            [iconSource]="'../../../assets/images/parametres.svg'"
+        ></app-round-button>
+        <app-round-button
+            *ngIf="!backButton"
             [iconSource]="'../../../assets/images/deconnexion.svg'"
         ></app-round-button>
     </div>
