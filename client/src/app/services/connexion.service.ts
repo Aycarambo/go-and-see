@@ -2,13 +2,15 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 
-import { catchError, tap, throwError } from "rxjs";
+import { catchError, tap, throwError, map } from "rxjs";
+import { joueur } from "../model/joueur";
 
 @Injectable({
   providedIn: "root",
 })
 export class connexionService {
   token: string;
+  user: joueur;
 
   constructor(private http: HttpClient) {}
 
