@@ -32,4 +32,28 @@ export class ArenesService {
       })
     );
   }
+
+  getArene(id: number) {
+    return this.http.get(`${this.arenesPath}/${id}`).pipe(
+      map((data: any) => data.data),
+      map((field: any) => {
+        return {
+          id: field.id,
+          nom: field.attributes.nom,
+          lat: field.attributes.lat,
+          long: field.attributes.long,
+          joueurActif: field.attributes.joueurActif.data.id,
+          dateCapture: field.attributes.dateCapture,
+        };
+      })
+    );
+  }
+
+  changeJoueurActif(areneId: number, joueurId: number) {
+    return this.http.put(`${this.arenesPath}/${areneId}`, {
+      data: {
+        joueurActif: joueurId,
+      },
+    });
+  }
 }
