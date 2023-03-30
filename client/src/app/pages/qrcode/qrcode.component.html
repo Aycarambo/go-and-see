@@ -1,21 +1,24 @@
-<main class="text-center flex flex-col gap-12">
-    <header>
-        <h1 class="headings mb-2">Faites vous plaisir !</h1>
-        <p>
-            Lorem ipsum dolor sit amet consectetur. Et lobortis vestibulum velit
-            malesuada sit.
-        </p>
-    </header>
+<div class="wrapper h-screen">
+    <app-header></app-header>
+    <main class="text-center flex flex-col gap-12">
+        <header>
+            <h1 class="headings mb-2">Faites vous plaisir !</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur. Et lobortis vestibulum
+                velit malesuada sit.
+            </p>
+        </header>
 
-    <section class="flex flex-col gap-4">
-        <div class="qr-code bg-grey" [innerHTML]="qrcodeHtml"></div>
-        <article>
-            <p class="font-medium pb-2">
-                -{{ bonAchat.pourcentage }}% chez nos magasins partenaires.
-            </p>
-            <p class="font-bold text-blue text-[1.125rem]">
-                CODE : {{ token }}
-            </p>
-        </article>
-    </section>
-</main>
+        <section class="flex flex-col gap-4">
+            <div class="qr-code" [innerHTML]="qrcodeHtml"></div>
+            <article>
+                <p class="font-medium pb-2">
+                    -{{ bonAchat.pourcentage }}% chez nos magasins partenaires.
+                </p>
+                <p class="font-bold text-blue text-[1.125rem]">
+                    CODE : {{ token }}
+                </p>
+            </article>
+        </section>
+    </main>
+</div>

@@ -36,6 +36,7 @@ export class QrcodeComponent implements OnInit {
         width: "100%",
         color: {
           dark: "#0043C6",
+          light: "#00000000",
         },
       },
       function (err: any, data: any) {
