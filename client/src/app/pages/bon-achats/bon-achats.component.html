@@ -1,0 +1,9 @@
+<h1>
+    {{credits}}
+</h1>
+
+<section class="flex flex-col gap-8 cursor-pointer">
+    <button *ngFor="let bonAchat of bonsAchats" class="bg-white" (click)="subCredits(bonAchat.prix)">
+        - {{bonAchat.prix}}
+    </button>
+</section>
