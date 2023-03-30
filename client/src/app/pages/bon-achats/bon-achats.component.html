@@ -1,9 +1,16 @@
-<h1>
-    {{credits}}
-</h1>
+<main class="wrapper h-screen">
+    <header>
+        <h1 class="headings mb-2">
+            Bons de réductions
+        </h1>
+        <p>
+            Lorem ipsum dolor sit amet consectetur. Et lobortis vestibulum velit malesuada sit.
+        </p>
+    </header>
 
-<section class="flex flex-col gap-8 cursor-pointer">
-    <button *ngFor="let bonAchat of bonsAchats" class="bg-white" (click)="subCredits(bonAchat.prix)">
-        - {{bonAchat.prix}}
-    </button>
-</section>
+    <ul class="flex flex-col gap-4 mt-8">
+        <li *ngFor="let bonAchat of bonsAchats">
+            <app-bon-achat [bonAchat]="bonAchat"></app-bon-achat>
+        </li>
+    </ul>
+</main>

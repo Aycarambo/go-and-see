@@ -56,4 +56,20 @@ export class ArenesService {
       },
     });
   }
+
+  getJoueurActif(areneId: number) {
+    return this.http.get(`${this.arenesPath}/${areneId}`).pipe(
+      map((data: any) => data.data.attributes.joueurActif.data),
+      map((field: any) => {
+        return {
+          id: field.id,
+          login: field.attributes.login,
+          points: field.attributes.points,
+          credits: field.attributes.credits,
+          lat: field.attributes.lat,
+          long: field.attributes.long,
+        };
+      })
+    );
+  }
 }

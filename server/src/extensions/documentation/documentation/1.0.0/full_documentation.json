@@ -2558,7 +2558,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               }
             }
@@ -2580,7 +2580,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
@@ -2899,7 +2899,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
@@ -3251,7 +3251,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
@@ -3570,7 +3570,7 @@
               "prixEnCredits": {
                 "type": "integer"
               },
-              "nom": {
+              "description": {
                 "type": "string"
               },
               "createdAt": {
