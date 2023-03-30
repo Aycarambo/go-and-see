@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     this.connexionService.login(this.form.value).subscribe({
       next: (res) => {
         console.log(res);
-
         this.succeed = true;
         setTimeout(() => {
           this.succeed = false;
@@ -49,10 +48,6 @@ export class LoginComponent implements OnInit {
         }, 3000);
       },
     });
-  }
-
-  onLogout() {
-    this.connexionService.logout();
   }
 
   ngOnInit(): void {}
