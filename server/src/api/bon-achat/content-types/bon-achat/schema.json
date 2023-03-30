@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bon_achats",
+  "info": {
+    "singularName": "bon-achat",
+    "pluralName": "bon-achats",
+    "displayName": "bonAchat"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "pourcentageReduction": {
+      "type": "integer"
+    },
+    "prixEnCredits": {
+      "type": "integer"
+    },
+    "nom": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "arenes",
+  "info": {
+    "singularName": "arene",
+    "pluralName": "arenes",
+    "displayName": "arene"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nom": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "long": {
+      "type": "float"
+    },
+    "joueur_actif": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    },
+    "dateCapture": {
+      "type": "datetime"
+    }
+  }
+}
