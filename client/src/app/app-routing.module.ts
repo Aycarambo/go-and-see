@@ -9,6 +9,8 @@ import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
 import { AuthGuard } from "./guards/can-access.guard";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
 
+import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
+
 const routes: Routes = [
   {
     path: "login",
@@ -31,6 +33,11 @@ const routes: Routes = [
   {
     path: "",
     component: BonAchatsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "partenaires",
+    component: PartenairesComponent,
     canActivate: [AuthGuard],
   },
 ];
