@@ -24,8 +24,9 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
-    path: "",
+    path: "bons-achats",
     component: BonAchatsComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
