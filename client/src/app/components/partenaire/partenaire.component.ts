@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-partenaire',
+  selector: "app-partenaire",
   templateUrl: "./partenaire.component.html",
   styleUrls: ["./partenaire.component.scss"],
 })
 export class PartenaireComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
