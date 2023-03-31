@@ -14,10 +14,13 @@ import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
 import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
+import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
+import { PartenaireComponent } from "./components/partenaire/partenaire.component";
+import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { ClassementComponent } from "./pages/classement/classement.component";
+import { SelectionAreneComponent } from "./pages/selection-arene/selection-arene.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
-import { ArenesComponent } from './pages/arenes/arenes.component';
-import { SelectionAreneComponent } from './pages/selection-arene/selection-arene.component';
 
 @NgModule({
   declarations: [
@@ -29,10 +32,13 @@ import { SelectionAreneComponent } from './pages/selection-arene/selection-arene
     RoundButtonComponent,
     MapComponent,
     CalculDistanceComponent,
+    ClassementComponent,
     QrcodeComponent,
+    PartenairesComponent,
+    PartenaireComponent,
     ArenesComponent,
     Dashboard,
-    SelectionAreneComponent
+    SelectionAreneComponent,
   ],
   imports: [
     BrowserModule,
