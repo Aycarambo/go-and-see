@@ -1,73 +1,52 @@
 <div class="wrapper h-screen">
-   <app-header></app-header>
-   <main class=" flex flex-col gap-12">
-      <header>
-         <h1 class="headings mb-2">Mes arènes</h1>
-         <p>
-            Lorem ipsum dolor sit amet consectetur. Et lobortis vestibulum
-            velit malesuada sit.
-         </p>
-      </header>
+    <app-header></app-header>
+    <main class="flex flex-col gap-12">
+        <header>
+            <h1 class="headings mb-2">Mes arènes</h1>
+            <p>
+                Lorem ipsum dolor sit amet consectetur. Et lobortis vestibulum
+                velit malesuada sit.
+            </p>
+        </header>
 
-      <section class="flex flex-col gap-4">
-         <nav>
-            <ul class="flex flex-col gap-4 mesArenesListe">
-               <li class="mesArenes rounded-3xl px-4 py-6 shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-                  <a class="flex justify-between" href="">
-                     <div>
-                        <h2 class="font-extrabold text-[#0043C6] uppercase text-xl">Fort Boyard</h2>
-                        <p class="font-normal text-[#0043C6] text-sm	">47° 37' 9.7536'</p>
-                     </div>
-                     <div class="flex flex-col gap-1">
-                        <div class="flex justify-end">
-                           <span class="mr-1">
-                              1j 3h 2min 15s
-                           </span>
-                           <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow">
-                              <img src="../../../assets/images/crown.svg" alt="" class="h-2.5 w-2.5" />
-                           </span>
-                        </div>
+        <section class="flex flex-col gap-4">
+            <nav>
+                <ul class="flex flex-col gap-4 mesArenesListe">
+                    <li class="mesArenes rounded-3xl px-4 py-6 shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]"
+                        *ngFor="let ownArene of ownArenes">
+                        <a class=" flex justify-between" [routerLink]="['/arene', ownArene.id]">
+                            <div>
+                                <h2 class="font-extrabold text-[#0043C6] uppercase text-xl">{{ownArene.nom}}</h2>
+                                <p class="font-normal text-[#0043C6] text-sm	">{{ownArene.lat}}' {{ownArene.long}}'</p>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <div class="flex justify-end">
+                                    <span class="mr-1">
+                                        1j 3h 2min 15s
+                                    </span>
+                                    <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow">
+                                        <img src="../../../assets/images/crown.svg" alt="" class="h-2.5 w-2.5" />
+                                    </span>
+                                </div>
 
-                        <div class="flex justify-end">
-                           <span class="mr-1">
-                              + 200
-                           </span>
-                           <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
-                              <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5 w-2.5" />
-                           </span>
-                        </div>
-                     </div>
-                  </a>
-               </li>
-               <li class="mesArenes rounded-3xl px-4 py-6 shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-                  <a class="flex justify-between" href="">
-                     <div>
-                        <h2 class="font-extrabold text-[#0043C6] uppercase text-xl">Fort Boyard</h2>
-                        <p class="font-normal text-[#0043C6] text-sm	">47° 37' 9.7536'</p>
-                     </div>
-                     <div class="flex flex-col gap-1">
-                        <div class="flex justify-end">
-                           <span class="mr-1">
-                              1j 3h 2min 15s
-                           </span>
-                           <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow">
-                              <img src="../../../assets/images/crown.svg" alt="" class="h-2.5 w-2.5" />
-                           </span>
-                        </div>
+                                <div class="flex justify-end">
+                                    <span class="mr-1"> + 20 </span>
+                                    <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow">
+                                        <img src="../../../assets/images/voile.svg" alt="" class="h-2.5 w-2.5" />
+                                    </span>
+                                </div>
 
-                        <div class="flex justify-end">
-                           <span class="mr-1">
-                              + 200
-                           </span>
-                           <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
-                              <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5 w-2.5" />
-                           </span>
-                        </div>
-                     </div>
-                  </a>
-               </li>
-            </ul>
-         </nav>
-      </section>
-   </main>
+                                <div class="flex justify-end">
+                                    <span class="mr-1"> + 200 </span>
+                                    <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                                        <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5 w-2.5" />
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
+    </main>
 </div>

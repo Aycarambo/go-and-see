@@ -69,6 +69,26 @@ input {
   display: flex;
   width: 8rem;
   height: 8rem;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    img {
+      border-radius: 100%;
+      width: 32px;
+    }
+  }
+}
+
+.marker {
+  background-image: url(./assets/images/bg-marker.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 2rem;
 }
 
 .marker-arene {
@@ -80,10 +100,9 @@ input {
   & > div {
     width: 4rem;
     height: 4rem;
-    background-color: white;
-    padding: 1rem;
+    @apply bg-white;
+    padding: 0.5rem;
     border-radius: 100%;
-    display: flex;
     position: relative;
 
     &::after {
@@ -94,7 +113,7 @@ input {
       width: 2.2rem;
       height: 2.2rem;
       border-radius: 5px;
-      background: white;
+      @apply bg-white;
       left: calc(50% - 0.3rem);
       transform: rotate(45deg) translateX(-50%);
       z-index: -1;
@@ -102,7 +121,16 @@ input {
   }
 
   & > p {
-    @apply text-xs font-extrabold text-white;
+    @apply text-xs font-extrabold text-blue;
     text-transform: uppercase;
+  }
+
+  &--active {
+    & > div {
+      @apply bg-blue;
+      &::after {
+        @apply bg-blue;
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import * as mapboxgl from "mapbox-gl";
 import { HttpClient } from "@angular/common/http";
@@ -9,6 +10,10 @@ import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
+
+import { merge } from "rxjs";
+
+import * as turf from "@turf/turf";
 
 interface markers {
   userMarker: mapboxgl.Marker | null;
@@ -35,13 +40,19 @@ export class MapComponent implements OnInit {
     playersMarkers: [],
   };
   destination: arene;
+  weatherData: any;
+  weatherTemp: any;
+  weatherIcon: string;
+  distanceToDestination: number;
+  justArrived: boolean;
 
   constructor(
     private arenesService: ArenesService,
     private playerService: PlayersService,
     private connexionService: connexionService,
-    private data: DestinationService,
-    private http: HttpClient
+    private http: HttpClient,
+    private destinationService: DestinationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -50,35 +61,53 @@ export class MapComponent implements OnInit {
       this.initMap(this.user.long, this.user.lat);
       this.initUserMarker(this.user.long, this.user.lat); // Init position joueur à la dernière valeure enregistrée en base
       this.initArenesMarkers();
+      this.initPlayersMarkers();
 
       if (navigator.geolocation) {
-        let currentlong, currentLat;
+        let currentLong, currentLat;
         navigator.geolocation.getCurrentPosition((position) => {
           // Init position joueur à la position actuelle
-          currentlong = position.coords.longitude;
+          currentLong = position.coords.longitude;
           currentLat = position.coords.latitude;
-          this.map.setCenter([currentlong, currentLat]);
+          this.map.setCenter([currentLong, currentLat]);
+          //Météo
+          this.http
+            .get(
+              `https://api.openweathermap.org/data/2.5/weather?lat=${currentLat}&lon=${currentLong}&appid=5c79177aad38a5e1472ed47aa678015d&units=metric`
+            )
+            .subscribe((data) => {
+              this.weatherData = data;
+              this.weatherTemp = Math.floor(this.weatherData.main.temp);
+              this.weatherIcon = this.getWeatherIcon(
+                this.weatherData.weather[0].main
+              );
+            });
         });
 
         setInterval(() => {
           navigator.geolocation.getCurrentPosition((position) => {
+            currentLong = position.coords.longitude;
+            currentLat = position.coords.latitude;
 
-            // Pour les besoins de la démo cette fonctionalité a été commenté
-            // currentlong = position.coords.longitude;
-            // currentLat = position.coords.latitude;
+            this.playerService
+              .updatePlayerPosition(this.user.id, currentLong, currentLat)
+              .subscribe();
 
-            // this.updateUserMarker(currentlong, currentLat);
+            this.manageDestination(currentLong, currentLat);
+
+            this.updateUserMarker(currentLong, currentLat);
             this.updateArenesMarkers();
+            this.updatePlayersMarkers();
           });
         }, 1000000000);
 
 
         // Pour les besoins de la démo cette fonctionalité a été insérer ici, en cas contraire, elle est supprimé
         navigator.geolocation.getCurrentPosition((position) => {
-          currentlong = position.coords.longitude;
+          currentLong = position.coords.longitude;
           currentLat = position.coords.latitude;
 
-          this.updateUserMarker(currentlong, currentLat);
+          this.updateUserMarker(currentLong, currentLat);
         });
 
 
@@ -91,15 +120,38 @@ export class MapComponent implements OnInit {
       }
     });
 
-    this.data.currentDestination.subscribe((destination) => {
+    this.destinationService.currentDestination.subscribe((destination) => {
       this.destination = destination;
     });
+  }
+
+  getWeatherIcon(data: string) {
+    let iconUrl = "";
+    switch (data) {
+      case "Clouds":
+        iconUrl = "../../../assets/images/clouds-icon.svg";
+        break;
+      case "Clear":
+        iconUrl = "../../../assets/images/sun-icon.svg";
+        break;
+      case "Snow":
+        iconUrl = "../../../assets/images/snow-icon.svg";
+        break;
+      case "Rain":
+        iconUrl = "../../../assets/images/rain-icon.svg";
+        break;
+
+      default:
+        iconUrl = "../../../assets/images/clouds-icon.svg";
+        break;
+    }
+    return iconUrl;
   }
 
   initUserMarker(long: number, lat: number) {
     const userMarker = document.createElement("div");
     const img = document.createElement("img");
-    img.src = "assets/images/marker.svg";
+    img.src = "assets/images/sail-icone.svg";
     userMarker.appendChild(img);
     userMarker.className = "marker";
 
@@ -129,15 +181,6 @@ export class MapComponent implements OnInit {
       arenes.forEach((arene) => {
         const img = document.createElement("img");
         img.src = "assets/images/arene.svg";
-
-        if (arene.joueurActif) {
-          this.playerService
-            .getAvatarUrl(arene.joueurActif)
-            .subscribe((url) => {
-              img.src = this.serverUrl + url;
-            });
-        }
-
         const el = document.createElement("a");
         el.setAttribute("href", "/arene/" + arene.id);
         const imgContain = document.createElement("div");
@@ -147,6 +190,16 @@ export class MapComponent implements OnInit {
         el.appendChild(imgContain);
         el.appendChild(p);
         el.className = "marker-arene";
+
+        if (arene.joueurActif) {
+          this.playerService
+            .getAvatarUrl(arene.joueurActif)
+            .subscribe((url) => {
+              img.src = this.serverUrl + url;
+            });
+          el.classList.add("marker-arene--active");
+        }
+
         const marker = new mapboxgl.Marker(el)
           .setLngLat([arene.long, arene.lat])
           .addTo(this.map);
@@ -167,6 +220,7 @@ export class MapComponent implements OnInit {
             if (!img) return;
 
             let url = "assets/images/arene.svg"; // Image arene vide
+            img.src = url;
             if (arene.joueurActif) {
               this.playerService
                 .getAvatarUrl(arene.joueurActif)
@@ -175,7 +229,6 @@ export class MapComponent implements OnInit {
                 });
             }
 
-            img.src = url;
             this.arenes[oldAreneIndex] = arene;
           }
         }
@@ -185,16 +238,17 @@ export class MapComponent implements OnInit {
 
   initPlayersMarkers() {
     this.playerService.getPlayersSorted().subscribe((players) => {
+      players = players.filter((player) => player.id !== this.user.id);
       players.forEach((player) => {
         const el = document.createElement("div");
         const imgContain = document.createElement("div");
         const img = document.createElement("img");
-        const p = document.createElement("p");
-        p.textContent = player.login;
-        img.src = "assets/images/marker.svg";
+        player.id !== this.user.id &&
+          this.playerService.getAvatarUrl(player.id).subscribe((url) => {
+            img.src = this.serverUrl + url;
+          });
         imgContain.appendChild(img);
         el.appendChild(imgContain);
-        el.appendChild(p);
         el.className = "marker";
         const marker = new mapboxgl.Marker(el)
           .setLngLat([player.long, player.lat])
@@ -218,7 +272,40 @@ export class MapComponent implements OnInit {
       container: "mapContainer",
       style: "mapbox://styles/glorel/clfv2k2sq001001mp4bu1k7a9",
       center: [long, lat],
-      zoom: 10,
+      zoom: 13,
+    });
+  }
+
+  manageDestination(long: number, lat: number) {
+    if (this.destination) {
+      this.distanceToDestination = turf.distance(
+        [long, lat],
+        [this.destination.long, this.destination.lat]
+      );
+
+      if (this.distanceToDestination < environment.minDistanceCaptureInMiles) {
+        this.arrivedAtDestination();
+      }
+    }
+  }
+
+  arrivedAtDestination() {
+    this.connexionService.me().subscribe((user: any) => {
+      const newPoints = user.points + 10;
+      const newCredits = user.credits + 10;
+
+      const updateBdd = merge(
+        this.connexionService.updatePoints(user.id, newPoints),
+        this.connexionService.updateCredits(user.id, newCredits),
+        this.arenesService.changeJoueurActif(this.destination.id, user.id)
+      );
+
+      updateBdd.subscribe(() => {
+        this.destinationService.changeDestination(null);
+        this.connexionService.me().subscribe((user: any) => {
+          this.user = user;
+        });
+      });
     });
   }
 

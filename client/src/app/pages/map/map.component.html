@@ -1,37 +1,76 @@
-<div id="mapContainer"></div>
+<div id="mapContainer">
+    <section class="meteo">
+        <img src={{weatherIcon}} class="meteo--icon">
+    <p class="temperature">{{weatherTemp}} °C</p>
+</section>
+</div>
 
 <button (click)="fetchJsonData()" style="position: fixed; top: 0px; background-color: blue; color: white">Lancer le
     test</button>
 
 <a [routerLink]="['/dashboard']" class="absolute bottom-0 w-full">
     <span class="block h-[4px] w-12 bg-white m-auto rounded-full mb-2"></span>
-    <div class="flex flex-row justify-between bg-white px-8 py-8 rounded-t-3xl max-w-[390px] m-auto">
+    <div
+        class="flex flex-row justify-between bg-white px-8 py-8 rounded-t-3xl max-w-[390px] m-auto"
+    >
         <figure class="flex flex-row items-center">
-            <img src="{{ serverUrl }}{{ user.avatar.url }}" alt="" class="h-16 w-16 object-cover rounded-lg" />
-            <h1 class="text-xl font-semibold ml-4" *ngIf="!destination">{{ user.username }}</h1>
+            <img
+                src="{{ serverUrl }}{{ user.avatar.url }}"
+                alt=""
+                class="h-16 w-16 object-cover rounded-lg"
+            />
+            <h1 class="text-xl font-semibold ml-4" *ngIf="!destination">
+                {{ user.username }}
+            </h1>
         </figure>
 
         <div class="flex flex-col gap-1 justify-center" *ngIf="!destination">
             <div class="flex flex-row items-center gap-2 justify-end">
                 <span>{{ user.credits }}</span>
-                <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow">
-                    <img src="../../../assets/images/voile.svg" alt="" class="h-2.5 w-2.5" />
+                <span
+                    class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow"
+                >
+                    <img
+                        src="../../../assets/images/voile.svg"
+                        alt=""
+                        class="h-2.5 w-2.5"
+                    />
                 </span>
             </div>
             <div class="flex flex-row items-center gap-2 justify-end">
                 <span>{{ user.points }}</span>
-                <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
-                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5 w-2.5" />
+                <span
+                    class="grid items-center justify-center h-5 w-5 rounded-full bg-blue"
+                >
+                    <img
+                        src="../../../assets/images/ancre.svg"
+                        alt=""
+                        class="h-2.5 w-2.5"
+                    />
                 </span>
             </div>
         </div>
 
-        <div class="flex flex-col gap-1 justify-center text-right" *ngIf="destination">
-            <h1 class="text-xl uppercase">Destination <span class="font-semibold">{{destination.nom}}</span></h1>
-            <p class="text-blue">
-                <span>{{destination.lat}}</span>
-                <span>{{destination.long}}</span>
-            </p>
+        <div
+            class="flex flex-col gap-1 justify-center text-right"
+            *ngIf="destination"
+        >
+            <h1 class="text-xl uppercase">
+                Destination
+                <span class="font-semibold">{{ destination.nom }}</span>
+            </h1>
+            <div class="text-blue">
+                <span class="mr-2">{{ destination.lat }}</span>
+                <span class="">{{ destination.long }}</span>
+                <img
+                    src="assets/images/arrow-right.svg"
+                    class="inline mx-2"
+                    alt=""
+                />
+                <span class="font-semibold arrow-before"
+                    >{{ distanceToDestination | number : "1.0-3" }} Mille</span
+                >
+            </div>
         </div>
     </div>
 </a>
