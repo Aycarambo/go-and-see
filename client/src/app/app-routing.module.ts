@@ -10,8 +10,8 @@ import { ClassementComponent } from "./pages/classement/classement.component";
 import { AuthGuard } from "./guards/can-access.guard";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
 import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { Page404Component } from "./pages/page404/page404.component";
 import { SelectionAreneComponent } from "./pages/selection-arene/selection-arene.component";
-
 import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
 
 const routes: Routes = [
@@ -57,6 +57,10 @@ const routes: Routes = [
   {
     path: "selection-arene",
     component: SelectionAreneComponent,
+  },
+  {
+    path: "**",
+    component: Page404Component,
   },
 ];
 

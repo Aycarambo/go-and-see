@@ -19,6 +19,7 @@ import { PartenaireComponent } from "./components/partenaire/partenaire.componen
 import { ArenesComponent } from "./pages/arenes/arenes.component";
 import { ClassementComponent } from "./pages/classement/classement.component";
 import { SelectionAreneComponent } from "./pages/selection-arene/selection-arene.component";
+import { Page404Component } from "./pages/page404/page404.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
 
@@ -38,6 +39,7 @@ import { AuthGuard } from "./guards/can-access.guard";
     PartenaireComponent,
     ArenesComponent,
     Dashboard,
+    Page404Component,
     SelectionAreneComponent,
   ],
   imports: [
