@@ -1,26 +1,25 @@
 <div class="h-screen flex flex-col">
-    <a [routerLink]="['/home']" class="w-full h-[60px] bg-[#B7D3F4] block"></a>
+    <a [routerLink]="['/home']" class="w-full h-[60px] bg-[#B7D3F4] block">
+        <span class="block h-[4px] w-12 bg-white m-auto rounded-full mt-6"></span>
+    </a>
     <main class="py-8 rounded-t-3xl bg-white h-full flex flex-col mt-[-20px]">
         <figure>
             <img src="./../../../assets/images/img-arene.png" class="w-full object-cover max-h-[200px]" alt="">
             <figcaption class="px-4 flex flex-col gap-4 mt-4">
                 <header class="flex items-start justify-between gap-4">
                     <div>
-                        <h1 class="font-extrabold uppercase text-4xl text-blue">Fort Boyart</h1>
-                        <p class="text-blue">47° 37' 9.7536'</p>
+                        <h1 class="font-extrabold uppercase text-4xl text-blue">{{arene.nom}}</h1>
+                        <p class="text-blue">47° {{arene.lat}}' {{arene.long}}'</p>
                     </div>
                     <div class="flex items-center gap-1 shrink-0">
                         <img src="./../../../assets/images/icone-crown.svg" alt="">
-                        <p class="text-yellow">Tania Martin</p>
+                        <p class="text-yellow">{{owner.login}}</p>
                     </div>
                 </header>
                 <p>
-                    Le fort Boyard est une fortification située sur un haut fond formé 
-                    d'un banc de sable à l'origine, appelé la « longe de Boyard », qui se 
-                    découvre à marée basse et est situé entre l'île d'Aix au nord-est, 
-                    l'île d'Oléron au sud-ouest...
+                    {{arene.description}}
                 </p>
-                <a href="" class="btn mt-2">Y-ALLER</a>
+                <button href="" class="btn mt-2" (click)="newDestination()">Y-ALLER</button>
             </figcaption>
         </figure>
     </main>

@@ -34,8 +34,6 @@ export class PlayersService {
         credits: field.credits,
         lat: field.lat,
         long: field.long,
-        longitude: 0,
-        latitude: 0,
       });
     });
 
@@ -48,6 +46,28 @@ export class PlayersService {
         return fields.avatar?.url || "";
       })
     );
+  }
+
+  getPlayer(id: number) {
+    return this.http.get(`${environment.apiUrl}/users/${id}?populate=*`).pipe(
+      map((data: any) => data),
+      map((field) => {
+        return this.buildPlayer(field);
+      })
+    );
+  }
+
+  buildPlayer(field: any): joueur {
+    let joueur: joueur = {
+      id: field.id,
+      login: field.username,
+      points: field.points,
+      credits: field.credits,
+      lat: field.lat,
+      long: field.long,
+    };
+
+    return joueur;
   }
 
   /*getRang(points:number) {

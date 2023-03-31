@@ -11,6 +11,7 @@ import { map } from "rxjs";
 export class ArenesService {
   constructor(private http: HttpClient) {}
   private arenesPath = `${environment.apiUrl}/arenes?populate=*`;
+  private arenePath = `${environment.apiUrl}/arenes`;
 
   getArenes() {
     return this.http.get(this.arenesPath).pipe(
@@ -31,6 +32,7 @@ export class ArenesService {
         lat: field.attributes.lat,
         long: field.attributes.long,
         joueurActif: field.attributes.joueurActif.data?.id || null,
+        description: field.attributes.description,
         dateCapture: field.attributes.dateCapture,
       });
     });
@@ -39,19 +41,26 @@ export class ArenesService {
   }
 
   getArene(id: number) {
-    return this.http.get(`${this.arenesPath}/${id}`).pipe(
+    return this.http.get(`${this.arenePath}/${id}?populate=*`).pipe(
       map((data: any) => data.data),
       map((field: any) => {
-        return {
-          id: field.id,
-          nom: field.attributes.nom,
-          lat: field.attributes.lat,
-          long: field.attributes.long,
-          joueurActif: field.attributes.joueurActif.data.id,
-          dateCapture: field.attributes.dateCapture,
-        };
+        return this.buildArene(field);
       })
     );
+  }
+
+  buildArene(field: any): arene {
+    let arene: arene = {
+      id: field.id,
+      nom: field.attributes.nom,
+      description: field.attributes.description,
+      lat: field.attributes.lat,
+      long: field.attributes.long,
+      joueurActif: field.attributes.joueurActif.data.id,
+      dateCapture: field.attributes.dateCapture,
+    };
+
+    return arene;
   }
 
   changeJoueurActif(areneId: number, joueurId: number) {
@@ -60,21 +69,5 @@ export class ArenesService {
         joueurActif: joueurId,
       },
     });
-  }
-
-  getJoueurActif(areneId: number) {
-    return this.http.get(`${this.arenesPath}/${areneId}`).pipe(
-      map((data: any) => data.data.attributes.joueurActif.data),
-      map((field: any) => {
-        return {
-          id: field.id,
-          login: field.attributes.login,
-          points: field.attributes.points,
-          credits: field.attributes.credits,
-          lat: field.attributes.lat,
-          long: field.attributes.long,
-        };
-      })
-    );
   }
 }

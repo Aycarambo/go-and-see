@@ -28,6 +28,9 @@
     },
     "dateCapture": {
       "type": "datetime"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

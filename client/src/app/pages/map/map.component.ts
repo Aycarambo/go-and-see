@@ -4,6 +4,7 @@ import * as mapboxgl from "mapbox-gl";
 import { ArenesService } from "src/app/services/arenes.service";
 import { arene } from "src/app/model/arenes";
 import { connexionService } from "src/app/services/connexion.service";
+import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
@@ -35,7 +36,8 @@ export class MapComponent implements OnInit {
   constructor(
     private arenesService: ArenesService,
     private playerService: PlayersService,
-    private connexionService: connexionService
+    private connexionService: connexionService,
+    private data: DestinationService
   ) {}
 
   ngOnInit(): void {
