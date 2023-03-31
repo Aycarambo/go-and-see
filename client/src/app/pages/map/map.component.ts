@@ -195,6 +195,7 @@ export class MapComponent implements OnInit {
             if (!img) return;
 
             let url = "assets/images/arene.svg"; // Image arene vide
+            img.src = url;
             if (arene.joueurActif) {
               this.playerService
                 .getAvatarUrl(arene.joueurActif)
@@ -203,7 +204,6 @@ export class MapComponent implements OnInit {
                 });
             }
 
-            img.src = url;
             this.arenes[oldAreneIndex] = arene;
           }
         }
@@ -269,7 +269,6 @@ export class MapComponent implements OnInit {
       const newPoints = user.points + 10;
       const newCredits = user.credits + 10;
 
-      console.log("arrived at destination");
       const updateBdd = merge(
         this.connexionService.updatePoints(user.id, newPoints),
         this.connexionService.updateCredits(user.id, newCredits),

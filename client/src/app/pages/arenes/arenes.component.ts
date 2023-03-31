@@ -27,7 +27,6 @@ export class ArenesComponent implements OnInit {
   getOwnArenes(number: number) {
     this.ArenesService.getAreneByJoueur(number).subscribe(
       (response: arene[]) => {
-        console.log(response);
         this.ownArenes = response;
       }
     );

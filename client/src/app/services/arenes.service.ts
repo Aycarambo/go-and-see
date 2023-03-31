@@ -37,19 +37,16 @@ export class ArenesService {
     const arenes: arene[] = [];
 
     fields.forEach((field: any) => {
-      console.log(field);
-
       arenes.push({
         id: field.id,
         nom: field.attributes.nom,
         lat: field.attributes.lat,
         long: field.attributes.long,
-        joueurActif: field.attributes.joueurActif?.data.id || null,
+        joueurActif: field.attributes.joueurActif?.data?.id || null,
         description: field.attributes.description,
         dateCapture: field.attributes.dateCapture,
       });
     });
-    console.log(arenes);
 
     return arenes;
   }
