@@ -5,7 +5,7 @@ import { arene } from "src/app/model/arenes";
 @Component({
   selector: "calcul-distance",
   templateUrl: "./calculDistance.component.html",
-  styleUrls: ["./calculDistance.component.scss"], 
+  styleUrls: ["./calculDistance.component.scss"],
 })
 export class CalculDistanceComponent implements OnInit {
   arenes: arene[] = [];
@@ -34,7 +34,7 @@ export class CalculDistanceComponent implements OnInit {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
-        this.startInterval();
+        // this.startInterval();
       });
     }
   }
@@ -63,17 +63,17 @@ export class CalculDistanceComponent implements OnInit {
     this.distance = Math.round(this.distance * 100) / 100;
   }
 
-  startInterval() {
-    this.intervalId = setInterval(() => {
-      if (this.selectedArena) {
-        this.calculateDistance(this.selectedArena);
-      }
-    }, 300000);
-  }
+  // startInterval() {
+  //   this.intervalId = setInterval(() => {
+  //     if (this.selectedArena) {
+  //       this.calculateDistance(this.selectedArena);
+  //     }
+  //   }, 300000);
+  // }
 
-  stopInterval() {
-    clearInterval(this.intervalId);
-  }
+  // stopInterval() {
+  //   clearInterval(this.intervalId);
+  // }
 
   degreesToRadians(degrees: number): number {
     return (degrees * Math.PI) / 180;
