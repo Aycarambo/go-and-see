@@ -9,6 +9,7 @@ import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
 import { AuthGuard } from "./guards/can-access.guard";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
 import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { Page404Component } from "./pages/page404/page404.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: "arenes",
     component: ArenesComponent,
+  },
+  {
+    path: "**",
+    component: Page404Component,
   },
 ];
 

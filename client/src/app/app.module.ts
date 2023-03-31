@@ -17,6 +17,7 @@ import { Dashboard } from "./pages/dashboard/dashboard.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
 import { ArenesComponent } from './pages/arenes/arenes.component';
+import { Page404Component } from './pages/page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ArenesComponent } from './pages/arenes/arenes.component';
     CalculDistanceComponent,
     QrcodeComponent,
     ArenesComponent,
-    Dashboard
+    Dashboard,
+    Page404Component
   ],
   imports: [
     BrowserModule,
