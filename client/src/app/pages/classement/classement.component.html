@@ -1,26 +1,30 @@
-<main class="classement flex flex-col gap-7 wrapper h-screen">
-    <header>
-        <h1 class="headings">
-            Classement
-        </h1>
-        <p>
-            Fin de Saison dans : 3j 5h 2min 30s
-        </p>
-    </header>
-    <section>
-        <ul class="shadow rounded-3xl px-4 py-2 bg-white">
-            <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white"
-                *ngFor="let joueur of joueurs">
-                <img src="../../../assets/images/trophee-1er.svg" alt="">
-                <div class="justify-self-center">
-                    <p class="font-semibold">{{joueur.login}}</p>
-                    <p class="text-xs text-blue">Matelot</p>
-                </div>
-                <p class="flex gap-1 text-xs items-center justify-self-end">{{joueur.points}} <span
-                        class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
-                        <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
-                    </span></p>
-            </li>
-        </ul>
-    </section>
-</main>
+<div class="wrapper h-screen">
+    <app-header></app-header>
+    
+    <main class="classement flex flex-col gap-7 ">
+        <header>
+            <h1 class="headings">
+                Classement
+            </h1>
+            <p>
+                Fin de Saison dans : 3j 5h 2min 30s
+            </p>
+        </header>
+        <section>
+            <ul class="shadow rounded-3xl px-4 py-2 bg-white">
+                <li class="grid-classement justify-between items-center py-2 border-b border-solid border-[#F3F3F3] bg-white"
+                    *ngFor="let joueur of joueurs">
+                    <img src="../../../assets/images/trophee-1er.svg" alt="">
+                    <div class="justify-self-center">
+                        <p class="font-semibold">{{joueur.login}}</p>
+                        <p class="text-xs text-blue">Matelot</p>
+                    </div>
+                    <p class="flex gap-1 text-xs items-center justify-self-end">{{joueur.points}} <span
+                            class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
+                            <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                        </span></p>
+                </li>
+            </ul>
+        </section>
+    </main>
+</div>
