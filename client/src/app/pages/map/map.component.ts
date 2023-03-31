@@ -1,3 +1,4 @@
+import { Router } from "@angular/router";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import * as mapboxgl from "mapbox-gl";
 
@@ -8,6 +9,10 @@ import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
+
+import { merge } from "rxjs";
+
+import * as turf from "@turf/turf";
 
 interface markers {
   userMarker: mapboxgl.Marker | null;
@@ -32,12 +37,15 @@ export class MapComponent implements OnInit {
     playersMarkers: [],
   };
   destination: arene;
+  distanceToDestination: number;
+  justArrived: boolean;
 
   constructor(
     private arenesService: ArenesService,
     private playerService: PlayersService,
     private connexionService: connexionService,
-    private data: DestinationService
+    private destinationService: DestinationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -49,25 +57,26 @@ export class MapComponent implements OnInit {
       this.initPlayersMarkers();
 
       if (navigator.geolocation) {
-        let currentlong, currentLat;
+        let currentLong, currentLat;
         navigator.geolocation.getCurrentPosition((position) => {
           // Init position joueur à la position actuelle
-          currentlong = position.coords.longitude;
+          currentLong = position.coords.longitude;
           currentLat = position.coords.latitude;
-          this.map.setCenter([currentlong, currentLat]);
+          this.map.setCenter([currentLong, currentLat]);
         });
 
         setInterval(() => {
           navigator.geolocation.getCurrentPosition((position) => {
-            currentlong = position.coords.longitude;
+            currentLong = position.coords.longitude;
             currentLat = position.coords.latitude;
 
             this.playerService
-              .updatePlayerPosition(this.user.id, currentlong, currentLat)
+              .updatePlayerPosition(this.user.id, currentLong, currentLat)
               .subscribe();
 
-            this.updateUserMarker(currentlong, currentLat);
-            this.updatePlayersMarkers();
+            this.manageDestination(currentLong, currentLat);
+
+            this.updateUserMarker(currentLong, currentLat);
             this.updateArenesMarkers();
           });
         }, 1000);
@@ -78,7 +87,7 @@ export class MapComponent implements OnInit {
       }
     });
 
-    this.data.currentDestination.subscribe((destination) => {
+    this.destinationService.currentDestination.subscribe((destination) => {
       this.destination = destination;
     });
   }
@@ -197,6 +206,40 @@ export class MapComponent implements OnInit {
       style: "mapbox://styles/glorel/clfv2k2sq001001mp4bu1k7a9",
       center: [long, lat],
       zoom: 10,
+    });
+  }
+
+  manageDestination(long: number, lat: number) {
+    if (this.destination) {
+      this.distanceToDestination = turf.distance(
+        [long, lat],
+        [this.destination.long, this.destination.lat]
+      );
+
+      if (this.distanceToDestination < environment.minDistanceCaptureInMiles) {
+        this.arrivedAtDestination();
+      }
+    }
+  }
+
+  arrivedAtDestination() {
+    this.connexionService.me().subscribe((user: any) => {
+      const newPoints = user.points + 10;
+      const newCredits = user.credits + 10;
+
+      console.log("arrived at destination");
+      const updateBdd = merge(
+        this.connexionService.updatePoints(user.id, newPoints),
+        this.connexionService.updateCredits(user.id, newCredits),
+        this.arenesService.changeJoueurActif(this.destination.id, user.id)
+      );
+
+      updateBdd.subscribe(() => {
+        this.destinationService.changeDestination(null);
+        this.connexionService.me().subscribe((user: any) => {
+          this.user = user;
+        });
+      });
     });
   }
 }
