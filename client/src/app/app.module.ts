@@ -14,9 +14,11 @@ import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
 import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
+import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
+import { PartenaireComponent } from "./components/partenaire/partenaire.component";
+import { ArenesComponent } from "./pages/arenes/arenes.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
-import { ArenesComponent } from './pages/arenes/arenes.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import { ArenesComponent } from './pages/arenes/arenes.component';
     MapComponent,
     CalculDistanceComponent,
     QrcodeComponent,
+    PartenairesComponent,
+    PartenaireComponent,
     ArenesComponent,
-    Dashboard
+    Dashboard,
   ],
   imports: [
     BrowserModule,
