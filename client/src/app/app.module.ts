@@ -17,6 +17,7 @@ import { Dashboard } from "./pages/dashboard/dashboard.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
 import { ArenesComponent } from './pages/arenes/arenes.component';
+import { SelectionAreneComponent } from './pages/selection-arene/selection-arene.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ArenesComponent } from './pages/arenes/arenes.component';
     CalculDistanceComponent,
     QrcodeComponent,
     ArenesComponent,
-    Dashboard
+    Dashboard,
+    SelectionAreneComponent
   ],
   imports: [
     BrowserModule,
