@@ -12,7 +12,7 @@ export class PlayersService {
   constructor(private http: HttpClient) {}
 
   getPlayersSorted() {
-    const params = new HttpParams().set("_sort", "age").set("_order", "desc");
+    const params = new HttpParams().set("sort", "points:desc");
     return this.http
       .get(`${environment.apiUrl}/users?populate=*`, { params })
       .pipe(
@@ -37,7 +37,7 @@ export class PlayersService {
       });
     });
 
-    return joueurs;
+    return joueurs.slice(0, 8);
   }
 
   getAvatarUrl(id: number) {
