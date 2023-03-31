@@ -54,6 +54,7 @@ export class MapComponent implements OnInit {
       this.initMap(this.user.long, this.user.lat);
       this.initUserMarker(this.user.long, this.user.lat); // Init position joueur à la dernière valeure enregistrée en base
       this.initArenesMarkers();
+      this.initPlayersMarkers();
 
       if (navigator.geolocation) {
         let currentLong, currentLat;
@@ -68,6 +69,10 @@ export class MapComponent implements OnInit {
           navigator.geolocation.getCurrentPosition((position) => {
             currentLong = position.coords.longitude;
             currentLat = position.coords.latitude;
+
+            this.playerService
+              .updatePlayerPosition(this.user.id, currentLong, currentLat)
+              .subscribe();
 
             this.manageDestination(currentLong, currentLat);
 
@@ -90,7 +95,7 @@ export class MapComponent implements OnInit {
   initUserMarker(long: number, lat: number) {
     const userMarker = document.createElement("div");
     const img = document.createElement("img");
-    img.src = "assets/images/marker.svg";
+    img.src = "assets/images/sail-icone.svg";
     userMarker.appendChild(img);
     userMarker.className = "marker";
 
@@ -166,16 +171,17 @@ export class MapComponent implements OnInit {
 
   initPlayersMarkers() {
     this.playerService.getPlayersSorted().subscribe((players) => {
+      players = players.filter((player) => player.id !== this.user.id);
       players.forEach((player) => {
         const el = document.createElement("div");
         const imgContain = document.createElement("div");
         const img = document.createElement("img");
-        const p = document.createElement("p");
-        p.textContent = player.login;
-        img.src = "assets/images/marker.svg";
+        player.id !== this.user.id &&
+          this.playerService.getAvatarUrl(player.id).subscribe((url) => {
+            img.src = this.serverUrl + url;
+          });
         imgContain.appendChild(img);
         el.appendChild(imgContain);
-        el.appendChild(p);
         el.className = "marker";
         const marker = new mapboxgl.Marker(el)
           .setLngLat([player.long, player.lat])
