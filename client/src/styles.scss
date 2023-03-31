@@ -66,9 +66,43 @@ input {
   top: 0;
   left: 0;
   z-index: 10;
-  display: block;
-  background-image: url("./assets/images/marker.svg");
-  background-size: contain;
+  display: flex;
   width: 8rem;
   height: 8rem;
+}
+
+.marker-arene {
+  display: grid;
+  place-items: center;
+  grid-gap: 1rem;
+  width: auto;
+  height: auto;
+  & > div {
+    width: 4rem;
+    height: 4rem;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 100%;
+    display: flex;
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -18px;
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 5px;
+      background: white;
+      left: calc(50% - 0.3rem);
+      transform: rotate(45deg) translateX(-50%);
+      z-index: -1;
+    }
+  }
+
+  & > p {
+    @apply text-xs font-extrabold text-white;
+    text-transform: uppercase;
+  }
 }

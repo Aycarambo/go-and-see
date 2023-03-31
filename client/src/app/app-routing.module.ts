@@ -5,8 +5,14 @@ import { RouterModule, Routes } from "@angular/router";
 import { MapComponent } from "./pages/map/map.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
+import { ClassementComponent } from "./pages/classement/classement.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
+import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { Page404Component } from "./pages/page404/page404.component";
+import { SelectionAreneComponent } from "./pages/selection-arene/selection-arene.component";
+import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
 
 const routes: Routes = [
   {
@@ -24,14 +30,37 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: "dashboard",
+    component: Dashboard,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "bons-achats",
     component: BonAchatsComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: "dashboard",
-    component: BonAchatsComponent,
+    path: "classement",
+    component: ClassementComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "partenaires",
+    component: PartenairesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "arenes",
+    component: ArenesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "selection-arene",
+    component: SelectionAreneComponent,
+  },
+  {
+    path: "**",
+    component: Page404Component,
   },
 ];
 

@@ -1,7 +1,8 @@
 export interface joueur {
+  longitude: number;
+  latitude: number;
   id: number;
   login: string;
-  password: string;
   points: number;
   credits: number;
   lat: number;
