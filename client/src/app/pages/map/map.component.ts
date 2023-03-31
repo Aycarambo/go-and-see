@@ -115,15 +115,6 @@ export class MapComponent implements OnInit {
       arenes.forEach((arene) => {
         const img = document.createElement("img");
         img.src = "assets/images/arene.svg";
-
-        if (arene.joueurActif) {
-          this.playerService
-            .getAvatarUrl(arene.joueurActif)
-            .subscribe((url) => {
-              img.src = this.serverUrl + url;
-            });
-        }
-
         const el = document.createElement("a");
         el.setAttribute("href", "/arene/" + arene.id);
         const imgContain = document.createElement("div");
@@ -133,6 +124,16 @@ export class MapComponent implements OnInit {
         el.appendChild(imgContain);
         el.appendChild(p);
         el.className = "marker-arene";
+
+        if (arene.joueurActif) {
+          this.playerService
+            .getAvatarUrl(arene.joueurActif)
+            .subscribe((url) => {
+              img.src = this.serverUrl + url;
+            });
+          el.classList.add("marker-arene--active");
+        }
+
         const marker = new mapboxgl.Marker(el)
           .setLngLat([arene.long, arene.lat])
           .addTo(this.map);
