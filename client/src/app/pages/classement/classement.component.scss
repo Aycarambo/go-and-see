@@ -3,7 +3,12 @@
   grid-template-columns: 70px 1fr 1fr;
 }
 
-.classement ul > li:last-child {
+.classement ul > .user {
+  font-weight: 700;
+  color: #0043c6;
+}
+
+.classement ul > li:nth-child(9) {
   @apply mt-8;
   @apply pt-4;
   position: relative;
