@@ -11,6 +11,7 @@ import { bonAchat } from "src/app/model/bonAchat";
   styleUrls: ["./bon-achats.component.scss"],
 })
 export class BonAchatsComponent implements OnInit {
+  qrcode: any = null;
   credits: number = 0;
   bonsAchats: bonAchat[] = [];
 
@@ -22,12 +23,12 @@ export class BonAchatsComponent implements OnInit {
   ngOnInit(): void {
     this.getBonAchats();
     this.getCredits();
+    // this.credits = 1000;
   }
 
   getBonAchats() {
     this.bonAchatService.getBonAchats().subscribe((response: bonAchat[]) => {
       this.bonsAchats = response;
-      console.log(this.bonsAchats);
     });
   }
 
@@ -37,7 +38,7 @@ export class BonAchatsComponent implements OnInit {
     });
   }
 
-  subCredits(prix: number) {
-    this.credits - prix >= 0 ? (this.credits -= prix) : "";
+  showQrCode(bonAchat: bonAchat) {
+    this.qrcode = bonAchat;
   }
 }

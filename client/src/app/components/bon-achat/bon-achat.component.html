@@ -1,6 +1,10 @@
 <button
-    class="flex flex-row justify-between bg-white w-full p-4 rounded-3xl shadow text-left relative overflow-hidden shake"
+    class="flex flex-row justify-between bg-white w-full p-4 rounded-3xl shadow text-left relative overflow-hidden"
     (click)="acheterBonAchat()"
+    name="bonAchatButton"
+    ngDefaultControl
+    ngModel
+    #bonAchatButton
 >
     <div>
         <h2 class="headings-sm">{{ bonAchat.pourcentage }}% de réduction</h2>

@@ -1,4 +1,4 @@
-<div class="wrapper h-screen">
+<div class="wrapper h-screen" *ngIf="qrcode === null">
     <app-header></app-header>
     <main>
         <header>
@@ -14,8 +14,11 @@
                 <app-bon-achat
                     [bonAchat]="bonAchat"
                     [credits]="credits"
+                    (achat)="showQrCode($event)"
                 ></app-bon-achat>
             </li>
         </ul>
     </main>
 </div>
+
+<app-qrcode *ngIf="qrcode !== null" [bonAchat]="qrcode"></app-qrcode>

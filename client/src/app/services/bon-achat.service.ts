@@ -45,7 +45,6 @@ export class bonAchatService {
     const bonAchats: bonAchat[] = [];
 
     fields.forEach((field: any) => {
-      console.log(field);
       bonAchats.push({
         id: field.id,
         description: field.attributes.description,
