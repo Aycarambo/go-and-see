@@ -37,8 +37,6 @@ export class ArenesService {
     const arenes: arene[] = [];
 
     fields.forEach((field: any) => {
-      console.log(field);
-
       arenes.push({
         id: field.id,
         nom: field.attributes.nom,
@@ -49,7 +47,6 @@ export class ArenesService {
         dateCapture: field.attributes.dateCapture,
       });
     });
-    console.log(arenes);
 
     return arenes;
   }

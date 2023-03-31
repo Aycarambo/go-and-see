@@ -18,7 +18,6 @@ export class partenaireService {
     return this.http.get(`${environment.apiUrl}/${this.partenairePath}`).pipe(
       map((data: any) => data.data),
       map((fields) => {
-        console.log(`${environment.apiUrl}/${this.partenairePath}`);
         return this.buildPartenaire(fields);
       })
     );

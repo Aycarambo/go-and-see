@@ -269,7 +269,6 @@ export class MapComponent implements OnInit {
       const newPoints = user.points + 10;
       const newCredits = user.credits + 10;
 
-      console.log("arrived at destination");
       const updateBdd = merge(
         this.connexionService.updatePoints(user.id, newPoints),
         this.connexionService.updateCredits(user.id, newCredits),
