@@ -9,6 +9,7 @@ import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
+import { HttpClient } from "@angular/common/http";
 
 import { merge } from "rxjs";
 
@@ -37,6 +38,9 @@ export class MapComponent implements OnInit {
     playersMarkers: [],
   };
   destination: arene;
+  weatherData: any;
+  weatherTemp: any;
+  weatherIcon: string;
   distanceToDestination: number;
   justArrived: boolean;
 
@@ -44,6 +48,7 @@ export class MapComponent implements OnInit {
     private arenesService: ArenesService,
     private playerService: PlayersService,
     private connexionService: connexionService,
+    private http: HttpClient,
     private destinationService: DestinationService,
     private router: Router
   ) {}
@@ -63,6 +68,18 @@ export class MapComponent implements OnInit {
           currentLong = position.coords.longitude;
           currentLat = position.coords.latitude;
           this.map.setCenter([currentLong, currentLat]);
+          //Météo
+          this.http
+            .get(
+              `https://api.openweathermap.org/data/2.5/weather?lat=${currentLat}&lon=${currentLong}&appid=5c79177aad38a5e1472ed47aa678015d&units=metric`
+            )
+            .subscribe((data) => {
+              this.weatherData = data;
+              this.weatherTemp = Math.floor(this.weatherData.main.temp);
+              this.weatherIcon = this.getWeatherIcon(
+                this.weatherData.weather[0].main
+              );
+            });
         });
 
         setInterval(() => {
@@ -78,6 +95,7 @@ export class MapComponent implements OnInit {
 
             this.updateUserMarker(currentLong, currentLat);
             this.updateArenesMarkers();
+            this.updatePlayersMarkers();
           });
         }, 1000);
       } else {
@@ -90,6 +108,29 @@ export class MapComponent implements OnInit {
     this.destinationService.currentDestination.subscribe((destination) => {
       this.destination = destination;
     });
+  }
+
+  getWeatherIcon(data: string) {
+    let iconUrl = "";
+    switch (data) {
+      case "Clouds":
+        iconUrl = "../../../assets/images/clouds-icon.svg";
+        break;
+      case "Clear":
+        iconUrl = "../../../assets/images/sun-icon.svg";
+        break;
+      case "Snow":
+        iconUrl = "../../../assets/images/snow-icon.svg";
+        break;
+      case "Rain":
+        iconUrl = "../../../assets/images/rain-icon.svg";
+        break;
+
+      default:
+        iconUrl = "../../../assets/images/clouds-icon.svg";
+        break;
+    }
+    return iconUrl;
   }
 
   initUserMarker(long: number, lat: number) {
@@ -206,7 +247,7 @@ export class MapComponent implements OnInit {
       container: "mapContainer",
       style: "mapbox://styles/glorel/clfv2k2sq001001mp4bu1k7a9",
       center: [long, lat],
-      zoom: 10,
+      zoom: 13,
     });
   }
 
