@@ -4,6 +4,7 @@ import * as mapboxgl from "mapbox-gl";
 import { ArenesService } from "src/app/services/arenes.service";
 import { arene } from "src/app/model/arenes";
 import { connexionService } from "src/app/services/connexion.service";
+import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
@@ -22,13 +23,16 @@ export class MapComponent implements AfterViewInit {
   user: any;
   serverUrl = environment.serverUrl;
   players: joueur[] = [];
+  destination: arene;
+
   private map: mapboxgl.Map;
   private markers: mapboxgl.Marker[] = [];
 
   constructor(
     private arenesService: ArenesService,
     private playerService: PlayersService,
-    private connexionService: connexionService
+    private connexionService: connexionService,
+    private data: DestinationService
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +41,10 @@ export class MapComponent implements AfterViewInit {
     });
 
     this.initMap();
+
+    this.data.currentDestination.subscribe((destination) => {
+      this.destination = destination;
+    });
   }
 
   initMap(): void {
@@ -62,7 +70,8 @@ export class MapComponent implements AfterViewInit {
           this.arenes = arenes;
 
           this.arenes.forEach((arene) => {
-            const el = document.createElement("div");
+            const el = document.createElement("a");
+            el.setAttribute("href", "/arene/" + arene.id);
             const imgContain = document.createElement("div");
             const img = document.createElement("img");
             const p = document.createElement("p");
@@ -116,26 +125,6 @@ export class MapComponent implements AfterViewInit {
             .setLngLat([player.long, player.lat])
             .addTo(this.map);
           //this.players.push(marker);
-        });
-      });
-      //arenas markers
-      this.arenesService.getArenes().subscribe((arenes) => {
-        this.arenes = arenes;
-
-        this.arenes.forEach((arene) => {
-          const el = document.createElement("div");
-          const imgContain = document.createElement("div");
-          const img = document.createElement("img");
-          const p = document.createElement("p");
-          p.textContent = arene.nom;
-          img.src = "assets/images/arene.svg";
-          imgContain.appendChild(img);
-          el.appendChild(imgContain);
-          el.appendChild(p);
-          el.className = "marker-arene";
-          new mapboxgl.Marker(el)
-            .setLngLat([arene.long, arene.lat])
-            .addTo(this.map);
         });
       });
     }, 300); // 5 minutes en millisecondes

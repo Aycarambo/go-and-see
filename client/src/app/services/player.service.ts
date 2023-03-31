@@ -12,13 +12,15 @@ export class PlayersService {
   constructor(private http: HttpClient) {}
 
   getPlayersSorted() {
-    const params = new HttpParams().set('_sort', 'age').set('_order', 'desc');
-    return this.http.get(`${environment.apiUrl}/users?populate=*`, { params }).pipe(
-      map((data: any) => data),
-      map((fields) => {
-        return this.buildPlayers(fields);
-      })
-    );
+    const params = new HttpParams().set("_sort", "age").set("_order", "desc");
+    return this.http
+      .get(`${environment.apiUrl}/users?populate=*`, { params })
+      .pipe(
+        map((data: any) => data),
+        map((fields) => {
+          return this.buildPlayers(fields);
+        })
+      );
   }
 
   buildPlayers(fields: any): joueur[] {
@@ -26,18 +28,38 @@ export class PlayersService {
 
     fields.forEach((field: any) => {
       joueurs.push({
-          id: field.id,
-          login: field.username,
-          points: field.points,
-          credits: field.credits,
-          lat: field.lat,
-          long: field.long,
-          longitude: 0,
-          latitude: 0
+        id: field.id,
+        login: field.username,
+        points: field.points,
+        credits: field.credits,
+        lat: field.lat,
+        long: field.long,
       });
     });
 
     return joueurs;
+  }
+
+  getPlayer(id: number) {
+    return this.http.get(`${environment.apiUrl}/users/${id}?populate=*`).pipe(
+      map((data: any) => data),
+      map((field) => {
+        return this.buildPlayer(field);
+      })
+    );
+  }
+
+  buildPlayer(field: any): joueur {
+    let joueur: joueur = {
+      id: field.id,
+      login: field.username,
+      points: field.points,
+      credits: field.credits,
+      lat: field.lat,
+      long: field.long,
+    };
+
+    return joueur;
   }
 
   /*getRang(points:number) {
