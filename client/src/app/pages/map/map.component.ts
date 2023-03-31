@@ -62,11 +62,15 @@ export class MapComponent implements OnInit {
             currentlong = position.coords.longitude;
             currentLat = position.coords.latitude;
 
+            this.playerService
+              .updatePlayerPosition(this.user.id, currentlong, currentLat)
+              .subscribe();
+
             this.updateUserMarker(currentlong, currentLat);
             this.updatePlayersMarkers();
             this.updateArenesMarkers();
           });
-        }, 100000);
+        }, 1000);
       } else {
         alert(
           "La géolocalisation n'est pas prise en charge par ce navigateur."
@@ -158,13 +162,15 @@ export class MapComponent implements OnInit {
 
   initPlayersMarkers() {
     this.playerService.getPlayersSorted().subscribe((players) => {
+      players = players.filter((player) => player.id !== this.user.id);
       players.forEach((player) => {
         const el = document.createElement("div");
         const imgContain = document.createElement("div");
         const img = document.createElement("img");
-        (player.id !== this.user.id) && this.playerService.getAvatarUrl(player.id).subscribe((url) => {
-          img.src = this.serverUrl + url;
-        });
+        player.id !== this.user.id &&
+          this.playerService.getAvatarUrl(player.id).subscribe((url) => {
+            img.src = this.serverUrl + url;
+          });
         imgContain.appendChild(img);
         el.appendChild(imgContain);
         el.className = "marker";

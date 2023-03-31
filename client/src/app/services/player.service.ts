@@ -70,6 +70,13 @@ export class PlayersService {
     return joueur;
   }
 
+  updatePlayerPosition(id: number, long: number, lat: number) {
+    return this.http.put(`${environment.apiUrl}/users/${id}`, {
+      lat,
+      long,
+    });
+  }
+
   /*getRang(points:number) {
     switch (points) {
         case (< 50):
