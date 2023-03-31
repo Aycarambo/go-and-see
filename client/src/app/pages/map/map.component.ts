@@ -9,21 +9,28 @@ import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
 import { joueur } from "src/app/model/joueur";
 
+interface markers {
+  userMarker: mapboxgl.Marker | null;
+  arenesMarkers: mapboxgl.Marker[];
+  playersMarkers: mapboxgl.Marker[];
+}
+
 @Component({
   selector: "app-map",
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"],
   //styles : ["node_modules/mapbox-gl/dist/mapbox-gl.css",],
 })
-export class MapComponent implements AfterViewInit {
-  userLat: number;
-  userLong: number;
+export class MapComponent implements OnInit {
   arenes: arene[] = [];
   user: any;
   serverUrl = environment.serverUrl;
-  players: joueur[] = [];
   private map: mapboxgl.Map;
-  private markers: mapboxgl.Marker[] = [];
+  private markers: markers = {
+    userMarker: null,
+    arenesMarkers: [],
+    playersMarkers: [],
+  };
 
   constructor(
     private arenesService: ArenesService,
@@ -34,114 +41,148 @@ export class MapComponent implements AfterViewInit {
   ngOnInit(): void {
     this.connexionService.me().subscribe((user) => {
       this.user = user;
-    });
+      this.initMap(this.user.long, this.user.lat);
+      this.initUserMarker(this.user.long, this.user.lat); // Init position joueur à la dernière valeure enregistrée en base
+      this.initArenesMarkers();
 
-    this.initMap();
-  }
-
-  initMap(): void {
-    if (navigator.geolocation) {
-      //Check si le navigateur autorise la geolocalisation
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.userLat = position.coords.latitude;
-        this.userLong = position.coords.longitude;
-        this.map = new mapboxgl.Map({
-          accessToken:
-            "pk.eyJ1IjoiZ2xvcmVsIiwiYSI6ImNsZnYyaGhrMzAwOXYzZ2xpYmdyMTY4eXcifQ.MlyXT1DScZQ2RGqJL1PuIg",
-          container: "mapContainer",
-          style: "mapbox://styles/glorel/clfv2k2sq001001mp4bu1k7a9",
-          center: [this.userLong, this.userLat],
-          zoom: 10,
+      if (navigator.geolocation) {
+        let currentlong, currentLat;
+        navigator.geolocation.getCurrentPosition((position) => {
+          // Init position joueur à la position actuelle
+          currentlong = position.coords.longitude;
+          currentLat = position.coords.latitude;
+          this.map.setCenter([currentlong, currentLat]);
         });
 
-        // const el = document.createElement("div");
-        // el.className = "marker";
-        // new mapboxgl.Marker(el);
+        setInterval(() => {
+          navigator.geolocation.getCurrentPosition((position) => {
+            currentlong = position.coords.longitude;
+            currentLat = position.coords.latitude;
 
-        this.arenesService.getArenes().subscribe((arenes) => {
-          this.arenes = arenes;
-
-          this.arenes.forEach((arene) => {
-            const el = document.createElement("div");
-            const imgContain = document.createElement("div");
-            const img = document.createElement("img");
-            const p = document.createElement("p");
-            p.textContent = arene.nom;
-            img.src = "assets/images/arene.svg";
-            imgContain.appendChild(img);
-            el.appendChild(imgContain);
-            el.appendChild(p);
-            el.className = "marker-arene";
-            new mapboxgl.Marker(el)
-              .setLngLat([arene.long, arene.lat])
-              .addTo(this.map);
+            this.updateUserMarker(currentlong, currentLat);
+            this.updateArenesMarkers();
           });
-        });
+        }, 1000);
+      } else {
+        alert(
+          "La géolocalisation n'est pas prise en charge par ce navigateur."
+        );
+      }
+    });
+  }
 
-        const userMarker = document.createElement("div");
+  initUserMarker(long: number, lat: number) {
+    const userMarker = document.createElement("div");
+    const img = document.createElement("img");
+    img.src = "assets/images/marker.svg";
+    userMarker.appendChild(img);
+    userMarker.className = "marker";
+
+    this.markers.userMarker = new mapboxgl.Marker(userMarker)
+      .setLngLat([long, lat])
+      .addTo(this.map);
+  }
+
+  updateUserMarker(long: number, lat: number) {
+    this.markers.userMarker?.setLngLat([long, lat]);
+  }
+
+  initArenesMarkers() {
+    this.arenesService.getArenes().subscribe((arenes) => {
+      this.arenes = arenes;
+
+      arenes.forEach((arene) => {
         const img = document.createElement("img");
-        img.src = "assets/images/marker.svg";
-        userMarker.appendChild(img);
-        userMarker.className = "marker";
-        new mapboxgl.Marker(userMarker)
-          .setLngLat([this.userLong, this.userLat])
+        img.src = "assets/images/arene.svg";
+
+        if (arene.joueurActif) {
+          this.playerService
+            .getAvatarUrl(arene.joueurActif)
+            .subscribe((url) => {
+              img.src = this.serverUrl + url;
+            });
+        }
+
+        const el = document.createElement("div");
+        const imgContain = document.createElement("div");
+        const p = document.createElement("p");
+        p.textContent = arene.nom;
+        imgContain.appendChild(img);
+        el.appendChild(imgContain);
+        el.appendChild(p);
+        el.className = "marker-arene";
+        const marker = new mapboxgl.Marker(el)
+          .setLngLat([arene.long, arene.lat])
           .addTo(this.map);
+        this.markers.arenesMarkers?.push(marker);
       });
-    } else {
-      alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
-    }
+    });
   }
-  //affichage des markers (refresh tt les 5 minutes)
-  displayUsers(): void {
-    setInterval(() => {
-      //players markers
-      this.playerService.getPlayersSorted().subscribe((users) => {
-        // Supprimer les anciens marqueurs
-        this.markers.forEach((marker) => marker.remove());
-        this.markers = [];
-        this.players = users;
-        // Ajouter les nouveaux marqueurs
-        //var connectedPlayer = this.connexionService.me()
-        this.players.forEach((player) => {
-          const elUser = document.createElement("div");
-          elUser.className = "marker";
-          /*if(user.id !== connectedPlayer.id){
-            el.className = "marker-adversaire";
+
+  updateArenesMarkers() {
+    this.arenesService.getArenes().subscribe((arenes) => {
+      arenes.forEach((arene) => {
+        const oldAreneIndex = this.arenes.findIndex((a) => a.id === arene.id);
+        if (oldAreneIndex !== -1) {
+          const oldArene = this.arenes[oldAreneIndex];
+          if (oldArene.joueurActif !== arene.joueurActif) {
+            const marker = this.markers.arenesMarkers[oldAreneIndex];
+            const img = marker.getElement().querySelector("img");
+            if (!img) return;
+
+            let url = "assets/images/arene.svg"; // Image arene vide
+            if (arene.joueurActif) {
+              this.playerService
+                .getAvatarUrl(arene.joueurActif)
+                .subscribe((url) => {
+                  img.src = this.serverUrl + url;
+                });
+            }
+
+            img.src = url;
+            this.arenes[oldAreneIndex] = arene;
           }
-          else{
-            el.className = "marker";
-          }*/
-          const marker = new mapboxgl.Marker(elUser)
-
-            .setLngLat([player.long, player.lat])
-            .addTo(this.map);
-          //this.players.push(marker);
-        });
+        }
       });
-      //arenas markers
-      this.arenesService.getArenes().subscribe((arenes) => {
-        this.arenes = arenes;
-
-        this.arenes.forEach((arene) => {
-          const el = document.createElement("div");
-          const imgContain = document.createElement("div");
-          const img = document.createElement("img");
-          const p = document.createElement("p");
-          p.textContent = arene.nom;
-          img.src = "assets/images/arene.svg";
-          imgContain.appendChild(img);
-          el.appendChild(imgContain);
-          el.appendChild(p);
-          el.className = "marker-arene";
-          new mapboxgl.Marker(el)
-            .setLngLat([arene.long, arene.lat])
-            .addTo(this.map);
-        });
-      });
-    }, 300); // 5 minutes en millisecondes
+    });
   }
 
-  ngAfterViewInit(): void {
-    this.displayUsers();
+  initPlayersMarkers() {
+    this.playerService.getPlayersSorted().subscribe((players) => {
+      players.forEach((player) => {
+        const el = document.createElement("div");
+        const imgContain = document.createElement("div");
+        const img = document.createElement("img");
+        const p = document.createElement("p");
+        p.textContent = player.login;
+        img.src = "assets/images/marker.svg";
+        imgContain.appendChild(img);
+        el.appendChild(imgContain);
+        el.appendChild(p);
+        el.className = "marker";
+        const marker = new mapboxgl.Marker(el)
+          .setLngLat([player.long, player.lat])
+          .addTo(this.map);
+        this.markers.playersMarkers?.push(marker);
+      });
+    });
+  }
+
+  updatePlayersMarkers() {
+    this.markers.playersMarkers.forEach((marker) => {
+      marker.remove();
+    });
+    this.initPlayersMarkers();
+  }
+
+  initMap(long: number, lat: number): void {
+    this.map = new mapboxgl.Map({
+      accessToken:
+        "pk.eyJ1IjoiZ2xvcmVsIiwiYSI6ImNsZnYyaGhrMzAwOXYzZ2xpYmdyMTY4eXcifQ.MlyXT1DScZQ2RGqJL1PuIg",
+      container: "mapContainer",
+      style: "mapbox://styles/glorel/clfv2k2sq001001mp4bu1k7a9",
+      center: [long, lat],
+      zoom: 10,
+    });
   }
 }

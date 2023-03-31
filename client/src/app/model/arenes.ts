@@ -3,6 +3,6 @@ export interface arene {
   nom: string;
   lat: number;
   long: number;
-  joueurActif: number;
+  joueurActif: number | null;
   dateCapture: Date;
 }

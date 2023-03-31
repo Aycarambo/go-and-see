@@ -30,7 +30,7 @@ export class ArenesService {
         nom: field.attributes.nom,
         lat: field.attributes.lat,
         long: field.attributes.long,
-        joueurActif: field.attributes.joueurActif.data.id,
+        joueurActif: field.attributes.joueurActif.data?.id || null,
         dateCapture: field.attributes.dateCapture,
       });
     });

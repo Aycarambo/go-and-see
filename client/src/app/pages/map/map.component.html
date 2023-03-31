@@ -2,23 +2,41 @@
 
 <a [routerLink]="['/dashboard']" class="absolute bottom-0 w-full">
     <span class="block h-[4px] w-12 bg-white m-auto rounded-full mb-2"></span>
-    <div class="flex flex-row justify-between bg-white px-8 py-8 rounded-t-3xl max-w-[390px] m-auto">
+    <div
+        class="flex flex-row justify-between bg-white px-8 py-8 rounded-t-3xl max-w-[390px] m-auto"
+    >
         <figure class="flex flex-row items-center">
-            <img src={{serverUrl}}{{user.avatar.url}} alt="" class="h-16 w-16 object-cover rounded-lg">
-            <h1 class="text-xl font-semibold ml-4">{{user.username}}</h1>
+            <img
+                src="{{ serverUrl }}{{ user.avatar.url }}"
+                alt=""
+                class="h-16 w-16 object-cover rounded-lg"
+            />
+            <h1 class="text-xl font-semibold ml-4">{{ user.username }}</h1>
         </figure>
 
         <div class="flex flex-col gap-1 justify-center">
             <div class="flex flex-row items-center gap-2 justify-end">
-                <span>{{user.credits}}</span>
-                <span class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow">
-                    <img src="../../../assets/images/voile.svg" alt="" class="h-2.5	w-2.5">
+                <span>{{ user.credits }}</span>
+                <span
+                    class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow"
+                >
+                    <img
+                        src="../../../assets/images/voile.svg"
+                        alt=""
+                        class="h-2.5 w-2.5"
+                    />
                 </span>
             </div>
             <div class="flex flex-row items-center gap-2 justify-end">
-                <span>{{user.points}}</span>
-                <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
-                    <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+                <span>{{ user.points }}</span>
+                <span
+                    class="grid items-center justify-center h-5 w-5 rounded-full bg-blue"
+                >
+                    <img
+                        src="../../../assets/images/ancre.svg"
+                        alt=""
+                        class="h-2.5 w-2.5"
+                    />
                 </span>
             </div>
         </div>
