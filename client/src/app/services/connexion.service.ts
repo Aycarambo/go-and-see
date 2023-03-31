@@ -49,6 +49,12 @@ export class connexionService {
     });
   }
 
+  updatePoints(userId: number, newPoints: number) {
+    return this.http.put(`${environment.apiUrl}/users/${userId}`, {
+      points: newPoints,
+    });
+  }
+
   setToken(token: string) {
     this.token = token;
     localStorage.setItem("auth_token", token);
