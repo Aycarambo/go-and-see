@@ -78,7 +78,7 @@ export class ArenesService {
   }
 
   changeJoueurActif(areneId: number, joueurId: number) {
-    return this.http.put(`${this.arenesPath}/${areneId}`, {
+    return this.http.put(`${this.arenePath}/${areneId}`, {
       data: {
         joueurActif: joueurId,
       },
