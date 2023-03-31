@@ -10,6 +10,7 @@ import { ClassementComponent } from "./pages/classement/classement.component";
 import { AuthGuard } from "./guards/can-access.guard";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
 import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { SelectionAreneComponent } from "./pages/selection-arene/selection-arene.component";
 
 import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
 
@@ -52,6 +53,10 @@ const routes: Routes = [
     path: "arenes",
     component: ArenesComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "selection-arene",
+    component: SelectionAreneComponent,
   },
 ];
 
