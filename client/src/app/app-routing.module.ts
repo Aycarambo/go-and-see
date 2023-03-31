@@ -7,6 +7,8 @@ import { LoginComponent } from "./pages/login/login.component";
 import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
+import { ArenesComponent } from "./pages/arenes/arenes.component";
 
 const routes: Routes = [
   {
@@ -24,9 +26,17 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: "dashboard",
+    component: Dashboard,
+  },
+  {
     path: "bons-achats",
     component: BonAchatsComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: "arenes",
+    component: ArenesComponent,
   },
 ];
 

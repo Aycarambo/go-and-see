@@ -3,6 +3,9 @@ import * as mapboxgl from "mapbox-gl";
 
 import { ArenesService } from "src/app/services/arenes.service";
 import { arene } from "src/app/model/arenes";
+import { connexionService } from "src/app/services/connexion.service";
+
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-map",
@@ -14,9 +17,19 @@ export class MapComponent implements AfterViewInit {
   userLat: number;
   userLong: number;
   arenes: arene[] = [];
+  user: any;
+  serverUrl = environment.serverUrl;
 
-  constructor(private arenesService: ArenesService) {}
-  ngOnInit(): void {}
+  constructor(
+    private arenesService: ArenesService,
+    private connexionService: connexionService
+  ) {}
+
+  ngOnInit(): void {
+    this.connexionService.me().subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   private initMap(): void {
     if (navigator.geolocation) {
@@ -70,6 +83,7 @@ export class MapComponent implements AfterViewInit {
       alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
     }
   }
+
   ngAfterViewInit(): void {
     this.initMap();
   }

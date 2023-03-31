@@ -12,8 +12,11 @@ import { HeaderComponent } from "./components/header/header.component";
 import { RoundButtonComponent } from "./components/round-button/round-button.component";
 import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
+import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { ArenesComponent } from './pages/arenes/arenes.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { AuthGuard } from "./guards/can-access.guard";
     RoundButtonComponent,
     MapComponent,
     CalculDistanceComponent,
+    QrcodeComponent,
+    ArenesComponent,
+    Dashboard
   ],
   imports: [
     BrowserModule,
