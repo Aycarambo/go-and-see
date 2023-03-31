@@ -10,7 +10,7 @@ export class DestinationService {
   private destination = new BehaviorSubject<any>(null);
   currentDestination = this.destination.asObservable();
 
-  changeDestination(destination: arene) {
+  changeDestination(destination: arene | null) {
     this.destination.next(destination);
   }
 }
