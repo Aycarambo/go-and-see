@@ -12,9 +12,14 @@ import { HeaderComponent } from "./components/header/header.component";
 import { RoundButtonComponent } from "./components/round-button/round-button.component";
 import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
+import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
+import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
+import { PartenaireComponent } from "./components/partenaire/partenaire.component";
+import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { ClassementComponent } from "./pages/classement/classement.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
-import { ClassementComponent } from "./pages/classement/classement.component";
 
 @NgModule({
   declarations: [
@@ -27,6 +32,11 @@ import { ClassementComponent } from "./pages/classement/classement.component";
     MapComponent,
     CalculDistanceComponent,
     ClassementComponent,
+    QrcodeComponent,
+    PartenairesComponent,
+    PartenaireComponent,
+    ArenesComponent,
+    Dashboard,
   ],
   imports: [
     BrowserModule,

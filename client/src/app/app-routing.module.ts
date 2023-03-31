@@ -8,6 +8,10 @@ import { BonAchatsComponent } from "./pages/bon-achats/bon-achats.component";
 import { ClassementComponent } from "./pages/classement/classement.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
+import { ArenesComponent } from "./pages/arenes/arenes.component";
+
+import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
 
 const routes: Routes = [
   {
@@ -25,6 +29,11 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: "dashboard",
+    component: Dashboard,
+    canActivate: [AuthGuard],
+  },
+  {
     path: "bons-achats",
     component: BonAchatsComponent,
     canActivate: [AuthGuard],
@@ -32,6 +41,16 @@ const routes: Routes = [
   {
     path: "classement",
     component: ClassementComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "partenaires",
+    component: PartenairesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: "arenes",
+    component: ArenesComponent,
     canActivate: [AuthGuard],
   },
 ];

@@ -5,7 +5,7 @@ import { arene } from "src/app/model/arenes";
 @Component({
   selector: "calcul-distance",
   templateUrl: "./calculDistance.component.html",
-  styleUrls: ["./calculDistance.component.scss"],
+  styleUrls: ["./calculDistance.component.scss"], 
 })
 export class CalculDistanceComponent implements OnInit {
   arenes: arene[] = [];

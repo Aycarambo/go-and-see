@@ -3,6 +3,9 @@ import * as mapboxgl from "mapbox-gl";
 
 import { ArenesService } from "src/app/services/arenes.service";
 import { arene } from "src/app/model/arenes";
+import { connexionService } from "src/app/services/connexion.service";
+
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: "app-map",
@@ -14,9 +17,19 @@ export class MapComponent implements AfterViewInit {
   userLat: number;
   userLong: number;
   arenes: arene[] = [];
+  user: any;
+  serverUrl = environment.serverUrl;
 
-  constructor(private arenesService: ArenesService) {}
-  ngOnInit(): void {}
+  constructor(
+    private arenesService: ArenesService,
+    private connexionService: connexionService
+  ) {}
+
+  ngOnInit(): void {
+    this.connexionService.me().subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   private initMap(): void {
     if (navigator.geolocation) {
@@ -33,15 +46,23 @@ export class MapComponent implements AfterViewInit {
           zoom: 10,
         });
 
-        const el = document.createElement("div");
-        el.className = "marker";
-        new mapboxgl.Marker(el);
+        // const el = document.createElement("div");
+        // el.className = "marker";
+        // new mapboxgl.Marker(el);
 
         this.arenesService.getArenes().subscribe((arenes) => {
           this.arenes = arenes;
 
           this.arenes.forEach((arene) => {
             const el = document.createElement("div");
+            const imgContain = document.createElement("div");
+            const img = document.createElement("img");
+            const p = document.createElement("p");
+            p.textContent = arene.nom;
+            img.src = "assets/images/arene.svg";
+            imgContain.appendChild(img);
+            el.appendChild(imgContain);
+            el.appendChild(p);
             el.className = "marker-arene";
             new mapboxgl.Marker(el)
               .setLngLat([arene.long, arene.lat])
@@ -50,6 +71,9 @@ export class MapComponent implements AfterViewInit {
         });
 
         const userMarker = document.createElement("div");
+        const img = document.createElement("img");
+        img.src = "assets/images/marker.svg";
+        userMarker.appendChild(img);
         userMarker.className = "marker";
         new mapboxgl.Marker(userMarker)
           .setLngLat([this.userLong, this.userLat])
@@ -59,6 +83,7 @@ export class MapComponent implements AfterViewInit {
       alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
     }
   }
+
   ngAfterViewInit(): void {
     this.initMap();
   }
