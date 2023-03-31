@@ -34,7 +34,8 @@ export class MapComponent implements OnInit {
   };
   destination: arene;
   weatherData: any;
-  weatherIcon: any;
+  weatherTemp: any;
+  weatherIcon: string;
 
   constructor(
     private arenesService: ArenesService,
@@ -65,7 +66,8 @@ export class MapComponent implements OnInit {
             `https://api.openweathermap.org/data/2.5/weather?lat=${currentLat}&lon=${currentlong}&appid=5c79177aad38a5e1472ed47aa678015d&units=metric`
           )
           .subscribe((data) => {
-            this.weatherData = data;
+            this.weatherData = data
+            this.weatherTemp = Math.floor(this.weatherData.main.temp);
             this.weatherIcon = this.getWeatherIcon(this.weatherData.weather[0].main);
           });
         });
