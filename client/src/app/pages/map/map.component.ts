@@ -127,6 +127,7 @@ export class MapComponent implements OnInit {
         break;
 
       default:
+        iconUrl = "../../../assets/images/clouds-icon.svg";
         break;
     }
     return iconUrl;
