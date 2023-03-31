@@ -15,9 +15,13 @@
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
 <<<<<<< HEAD
+    "x-generation-date": "2023-03-31T06:13:34.175Z"
+=======
+<<<<<<< HEAD
     "x-generation-date": "2023-03-31T06:19:30.132Z"
 =======
     "x-generation-date": "2023-03-31T07:01:28.516Z"
+>>>>>>> master
 >>>>>>> master
   },
   "x-strapi-config": {
