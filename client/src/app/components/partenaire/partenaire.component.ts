@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { partenaire } from "src/app/model/partenaire";
+
 
 @Component({
   selector: "app-partenaire",
@@ -6,6 +8,8 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./partenaire.component.scss"],
 })
 export class PartenaireComponent implements OnInit {
+  @Input() partenaire: partenaire;
+
   constructor() {}
 
   ngOnInit(): void {}

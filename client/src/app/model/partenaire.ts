@@ -2,6 +2,6 @@ export interface partenaire {
   id: number;
   nom: string;
   description: string;
-  adresse: string;
+  ville: string;
   url: string;
 }

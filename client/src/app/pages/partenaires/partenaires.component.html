@@ -12,8 +12,8 @@
         </header>
 
         <ul class="flex flex-col gap-4 mt-8">
-            <li>
-                <app-partenaire></app-partenaire>
+            <li *ngFor="let partenaire of partenaires">
+                <app-partenaire [partenaire]="partenaire"></app-partenaire>
             </li>
         </ul>
     </main>

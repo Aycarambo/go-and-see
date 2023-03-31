@@ -31,7 +31,7 @@ export class partenaireService {
         id: field.id,
         nom: field.attributes.nom,
         description: field.attributes.description,
-        adresse: field.attributes.adresse,
+        ville: field.attributes.ville,
         url: field.attributes.url,
       });
     });
