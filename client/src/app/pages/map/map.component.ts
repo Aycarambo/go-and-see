@@ -95,24 +95,21 @@ export class MapComponent implements OnInit {
 
             this.manageDestination(currentLong, currentLat);
 
-            this.updateUserMarker(currentLong, currentLat);
+            // commenter pour mode test
+            // this.updateUserMarker(currentLong, currentLat);
             this.updateArenesMarkers();
             this.updatePlayersMarkers();
           });
-        }, 1000000000);
-
+        }, 1000);
 
         // Pour les besoins de la démo cette fonctionalité a été insérer ici, en cas contraire, elle est supprimé
+        // commenter pour sortir du mode test
         navigator.geolocation.getCurrentPosition((position) => {
           currentLong = position.coords.longitude;
           currentLat = position.coords.latitude;
 
           this.updateUserMarker(currentLong, currentLat);
         });
-
-
-        // this.startMarkerUpdates();
-
       } else {
         alert(
           "La géolocalisation n'est pas prise en charge par ce navigateur."
@@ -162,17 +159,8 @@ export class MapComponent implements OnInit {
 
   updateUserMarker(long: number, lat: number) {
     this.markers.userMarker?.setLngLat([long, lat]);
-    console.log(this.markers.userMarker)
+    console.log(this.markers.userMarker);
   }
-
-  // updateUserMarker(long: number, lat: number) {
-  //   if (!this.isUpdatingMarker) {
-  //     this.isUpdatingMarker = true;
-  //     this.markers.userMarker?.setLngLat([long, lat]);
-  //     this.isUpdatingMarker = false;
-  //   }
-  // }
-  
 
   initArenesMarkers() {
     this.arenesService.getArenes().subscribe((arenes) => {
@@ -222,6 +210,7 @@ export class MapComponent implements OnInit {
             let url = "assets/images/arene.svg"; // Image arene vide
             img.src = url;
             if (arene.joueurActif) {
+              marker.getElement().classList.add("marker-arene--active");
               this.playerService
                 .getAvatarUrl(arene.joueurActif)
                 .subscribe((url) => {
@@ -291,7 +280,7 @@ export class MapComponent implements OnInit {
 
   arrivedAtDestination() {
     this.connexionService.me().subscribe((user: any) => {
-      const newPoints = user.points + 10;
+      const newPoints = user.points + 100;
       const newCredits = user.credits + 10;
 
       const updateBdd = merge(
@@ -309,35 +298,12 @@ export class MapComponent implements OnInit {
     });
   }
 
-
-
-  // startMarkerUpdates() {
-  //   if (!this.markerUpdateInterval) {
-  //     this.markerUpdateInterval = setInterval(() => {
-  //       navigator.geolocation.getCurrentPosition((position) => {
-  //         const currentlong = position.coords.longitude;
-  //         const currentLat = position.coords.latitude;
-  
-  //         this.updateUserMarker(currentlong, currentLat);
-  //         this.updateArenesMarkers();
-  //       });
-  //     }, 1000);
-  //   }
-  // }
-  
-  // stopMarkerUpdates() {
-  //   if (this.markerUpdateInterval) {
-  //     clearInterval(this.markerUpdateInterval);
-  //     this.markerUpdateInterval = null;
-  //   }
-  // }
-  
-
+  // pour mode test
   fetchJsonData(): void {
     this.http.get("assets/test.json").subscribe((data: any) => {
       const etapes = data.etapes;
       let currentIndex = 0;
-  
+
       const updateMarker = () => {
         if (currentIndex >= etapes.length) {
           return;
@@ -345,20 +311,16 @@ export class MapComponent implements OnInit {
         this.updateUserMarker(
           parseFloat(etapes[currentIndex].lon),
           parseFloat(etapes[currentIndex].lat)
-        );        
+        );
+        this.manageDestination(
+          parseFloat(etapes[currentIndex].lon),
+          parseFloat(etapes[currentIndex].lat)
+        );
         currentIndex++;
         setTimeout(updateMarker, 1000);
       };
-  
+
       updateMarker();
     });
   }
-
-  
-  
-  
 }
-
-
-
-

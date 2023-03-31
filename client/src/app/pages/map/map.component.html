@@ -1,12 +1,16 @@
 <div id="mapContainer">
     <section class="meteo">
-        <img src={{weatherIcon}} class="meteo--icon">
-    <p class="temperature">{{weatherTemp}} °C</p>
-</section>
+        <img src="{{ weatherIcon }}" class="meteo--icon" />
+        <p class="temperature">{{ weatherTemp }} °C</p>
+    </section>
 </div>
 
-<button (click)="fetchJsonData()" style="position: fixed; top: 0px; background-color: blue; color: white">Lancer le
-    test</button>
+<button
+    (click)="fetchJsonData()"
+    style="position: fixed; top: 0px; background-color: blue; color: white"
+>
+    Lancer le test
+</button>
 
 <a [routerLink]="['/dashboard']" class="absolute bottom-0 w-full">
     <span class="block h-[4px] w-12 bg-white m-auto rounded-full mb-2"></span>
@@ -26,7 +30,7 @@
 
         <div class="flex flex-col gap-1 justify-center" *ngIf="!destination">
             <div class="flex flex-row items-center gap-2 justify-end">
-                <span>{{ user.credits }}</span>
+                <span>{{ user.points }}</span>
                 <span
                     class="grid items-center justify-center h-5 w-5 rounded-full bg-yellow"
                 >
@@ -38,7 +42,7 @@
                 </span>
             </div>
             <div class="flex flex-row items-center gap-2 justify-end">
-                <span>{{ user.points }}</span>
+                <span>{{ user.credits }}</span>
                 <span
                     class="grid items-center justify-center h-5 w-5 rounded-full bg-blue"
                 >

@@ -33,7 +33,9 @@ export class SelectionAreneComponent implements OnInit {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((params) => {
       this.getArene(params["id"]);
-      this.getOwner(this.arene.joueurActif);
+      if (this.arene.joueurActif) {
+        this.getOwner(this.arene.joueurActif);
+      }
     });
 
     this.data.currentDestination.subscribe((destination) => {
@@ -44,7 +46,10 @@ export class SelectionAreneComponent implements OnInit {
   getArene(id: any) {
     this.ArenesService.getArene(id).subscribe((response: arene) => {
       this.arene = response;
-      this.getOwner(this.arene.joueurActif);
+
+      if (this.arene.joueurActif) {
+        this.getOwner(this.arene.joueurActif);
+      }
     });
   }
 

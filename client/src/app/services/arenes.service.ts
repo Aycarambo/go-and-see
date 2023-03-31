@@ -67,7 +67,7 @@ export class ArenesService {
       description: field.attributes.description,
       lat: field.attributes.lat,
       long: field.attributes.long,
-      joueurActif: field.attributes.joueurActif.data.id,
+      joueurActif: field.attributes.joueurActif?.data?.id,
       dateCapture: field.attributes.dateCapture,
     };
 
