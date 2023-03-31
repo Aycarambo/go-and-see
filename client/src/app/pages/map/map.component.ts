@@ -4,6 +4,8 @@ import * as mapboxgl from "mapbox-gl";
 import { ArenesService } from "src/app/services/arenes.service";
 import { arene } from "src/app/model/arenes";
 import { connexionService } from "src/app/services/connexion.service";
+import { PlayersService } from "src/app/services/player.service";
+import { joueur } from "src/app/model/joueur";
 
 @Component({
   selector: "app-map",
@@ -15,19 +17,21 @@ export class MapComponent implements AfterViewInit {
   userLat: number;
   userLong: number;
   arenes: arene[] = [];
+  private map: mapboxgl.Map;
+  players: joueur[] = [];
   private markers: mapboxgl.Marker[] = [];
 
+  constructor(private arenesService: ArenesService, private playerService: PlayersService, private connexionService: connexionService) {}
+  ngOnInit(): void {
+    this.initMap();
+  }
 
-  constructor(private arenesService: ArenesService, private playerService: PlayerService, private connexionService: connexionService) {}
-  ngOnInit(): void {}
-
-  private initMap(): void {
+  initMap(): void {
     if (navigator.geolocation) { //Check si le navigateur autorise la geolocalisation
       navigator.geolocation.getCurrentPosition((position) => {
         this.userLat = position.coords.latitude;
         this.userLong = position.coords.longitude;
-
-        const homeMap = new mapboxgl.Map({
+          this.map = new mapboxgl.Map({
           accessToken:
             "pk.eyJ1IjoiZ2xvcmVsIiwiYSI6ImNsZnYyaGhrMzAwOXYzZ2xpYmdyMTY4eXcifQ.MlyXT1DScZQ2RGqJL1PuIg",
           container: "mapContainer",
@@ -42,48 +46,52 @@ export class MapComponent implements AfterViewInit {
     }
   }
   //affichage des markers (refresh tt les 5 minutes)
-  private displayUsers():void{
+  displayUsers():void{
     setInterval(() => {
       //players markers
-      this.playerService.getUsers().subscribe((users) => {
+      this.playerService.getPlayersSorted().subscribe((users) => {
         // Supprimer les anciens marqueurs
         this.markers.forEach((marker) => marker.remove());
         this.markers = [];
-
+        this.players = users;
         // Ajouter les nouveaux marqueurs
-        const connectedPlayer = this.connexionService.me()
-        users.forEach((user) => {
-          const el = document.createElement("div");
-          if(user.id !== connectedPlayer.id){
+        //var connectedPlayer = this.connexionService.me()
+        this.players.forEach((player) => {
+          const elUser = document.createElement("div");
+           elUser.className = "marker";
+          /*if(user.id !== connectedPlayer.id){
             el.className = "marker-adversaire";
           }
           else{
             el.className = "marker";
-          }
-          const marker = new mapboxgl.Marker(el)
-            .setLngLat([user.longitude, user.latitude])
-            .addTo(this.homeMap);
-          this.markers.push(marker);
+          }*/
+          const marker = new mapboxgl.Marker(elUser)
+         
+            .setLngLat([player.long, player.lat])
+            .addTo(this.map);
+          //this.players.push(marker);
         });
       });
       //arenas markers
       this.arenesService.getArenes().subscribe((arenes) => {
         this.arenes = arenes;
-
         this.arenes.forEach((arene) => {
           const el = document.createElement("div");
           el.className = "marker-arene";
           new mapboxgl.Marker(el)
             .setLngLat([arene.long, arene.lat])
-            .addTo(homeMap);
+            .addTo(this.map);
         });
       });
-    }, 300000); // 5 minutes en millisecondes
+    }, 300); // 5 minutes en millisecondes
   } 
+  homeMap(homeMap: any) {
+    throw new Error("Method not implemented.");
+  }
   
 
   ngAfterViewInit(): void {
-    this.initMap();
+    this.displayUsers();
   }
 }
 

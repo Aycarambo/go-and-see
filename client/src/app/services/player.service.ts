@@ -26,12 +26,14 @@ export class PlayersService {
 
     fields.forEach((field: any) => {
       joueurs.push({
-        id: field.id,
-        login: field.username,
-        points: field.points,
-        credits: field.credits,
-        lat: field.lat,
-        long: field.long,
+          id: field.id,
+          login: field.username,
+          points: field.points,
+          credits: field.credits,
+          lat: field.lat,
+          long: field.long,
+          longitude: 0,
+          latitude: 0
       });
     });
 
