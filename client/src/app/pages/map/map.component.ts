@@ -78,6 +78,7 @@ export class MapComponent implements OnInit {
 
             this.updateUserMarker(currentLong, currentLat);
             this.updateArenesMarkers();
+            this.updatePlayersMarkers();
           });
         }, 1000);
       } else {

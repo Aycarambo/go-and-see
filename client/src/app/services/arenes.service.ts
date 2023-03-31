@@ -22,20 +22,34 @@ export class ArenesService {
     );
   }
 
+  getAreneByJoueur(joueurId: number) {
+    return this.http
+      .get(`${this.arenesPath}/?filters[joueurActif][id][$eq]=${joueurId}`)
+      .pipe(
+        map((data: any) => data.data),
+        map((fields: any) => {
+          return this.buildArenes(fields);
+        })
+      );
+  }
+
   buildArenes(fields: any): arene[] {
     const arenes: arene[] = [];
 
     fields.forEach((field: any) => {
+      console.log(field);
+
       arenes.push({
         id: field.id,
         nom: field.attributes.nom,
         lat: field.attributes.lat,
         long: field.attributes.long,
-        joueurActif: field.attributes.joueurActif.data?.id || null,
+        joueurActif: field.attributes.joueurActif?.data.id || null,
         description: field.attributes.description,
         dateCapture: field.attributes.dateCapture,
       });
     });
+    console.log(arenes);
 
     return arenes;
   }
