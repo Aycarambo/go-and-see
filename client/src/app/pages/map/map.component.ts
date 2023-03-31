@@ -46,6 +46,7 @@ export class MapComponent implements OnInit {
       this.initMap(this.user.long, this.user.lat);
       this.initUserMarker(this.user.long, this.user.lat); // Init position joueur à la dernière valeure enregistrée en base
       this.initArenesMarkers();
+      this.initPlayersMarkers();
 
       if (navigator.geolocation) {
         let currentlong, currentLat;
@@ -62,9 +63,10 @@ export class MapComponent implements OnInit {
             currentLat = position.coords.latitude;
 
             this.updateUserMarker(currentlong, currentLat);
+            this.updatePlayersMarkers();
             this.updateArenesMarkers();
           });
-        }, 1000);
+        }, 100000);
       } else {
         alert(
           "La géolocalisation n'est pas prise en charge par ce navigateur."
@@ -80,7 +82,7 @@ export class MapComponent implements OnInit {
   initUserMarker(long: number, lat: number) {
     const userMarker = document.createElement("div");
     const img = document.createElement("img");
-    img.src = "assets/images/marker.svg";
+    img.src = "assets/images/sail-icone.svg";
     userMarker.appendChild(img);
     userMarker.className = "marker";
 
@@ -160,12 +162,11 @@ export class MapComponent implements OnInit {
         const el = document.createElement("div");
         const imgContain = document.createElement("div");
         const img = document.createElement("img");
-        const p = document.createElement("p");
-        p.textContent = player.login;
-        img.src = "assets/images/marker.svg";
+        (player.id !== this.user.id) && this.playerService.getAvatarUrl(player.id).subscribe((url) => {
+          img.src = this.serverUrl + url;
+        });
         imgContain.appendChild(img);
         el.appendChild(imgContain);
-        el.appendChild(p);
         el.className = "marker";
         const marker = new mapboxgl.Marker(el)
           .setLngLat([player.long, player.lat])
