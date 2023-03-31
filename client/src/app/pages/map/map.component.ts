@@ -8,7 +8,6 @@ import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
-import { joueur } from "src/app/model/joueur";
 
 interface markers {
   userMarker: mapboxgl.Marker | null;
@@ -32,6 +31,7 @@ export class MapComponent implements OnInit {
     arenesMarkers: [],
     playersMarkers: [],
   };
+  destination: arene;
 
   constructor(
     private arenesService: ArenesService,
@@ -71,6 +71,10 @@ export class MapComponent implements OnInit {
         );
       }
     });
+
+    this.data.currentDestination.subscribe((destination) => {
+      this.destination = destination;
+    });
   }
 
   initUserMarker(long: number, lat: number) {
@@ -105,7 +109,8 @@ export class MapComponent implements OnInit {
             });
         }
 
-        const el = document.createElement("div");
+        const el = document.createElement("a");
+        el.setAttribute("href", "/arene/" + arene.id);
         const imgContain = document.createElement("div");
         const p = document.createElement("p");
         p.textContent = arene.nom;
