@@ -2,6 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { PlayersService } from "src/app/services/player.service";
 
 import { joueur } from "src/app/model/joueur";
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 @Component({
   selector: "app-classement",
   templateUrl: "./classement.component.html",
