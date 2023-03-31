@@ -1,6 +1,6 @@
 <header class="flex items-center justify-between pt-10 mb-10">
     <div class="flex gap-2">
-        <a [routerLink]="['/']">
+        <a [routerLink]="[backUrl]" (click)="backClick.emit()">
             <app-round-button *ngIf="backButton"></app-round-button>
         </a>
         <app-round-button

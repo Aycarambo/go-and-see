@@ -1,20 +1,34 @@
-<button class="flex flex-row justify-between bg-white w-full p-4 rounded-3xl shadow text-left relative overflow-hidden"
-    (click)="subCredits(bonAchat.prix)">
+<button
+    class="flex flex-row justify-between bg-white w-full p-4 rounded-3xl shadow text-left relative overflow-hidden"
+    (click)="acheterBonAchat()"
+    name="bonAchatButton"
+    ngDefaultControl
+    ngModel
+    #bonAchatButton
+>
     <div>
-        <h2 class="headings-sm">
-            {{bonAchat.pourcentage }}% de réduction
-        </h2>
+        <h2 class="headings-sm">{{ bonAchat.pourcentage }}% de réduction</h2>
         <p class="content-sm mt-3">
-            {{bonAchat.description}}
+            {{ bonAchat.description }}
         </p>
     </div>
 
     <div class="flex flex-row items-center gap-2 mt-1">
-        <span>{{bonAchat.prix}}</span>
-        <span class="grid items-center justify-center h-5 w-5 rounded-full bg-blue">
-            <img src="../../../assets/images/ancre.svg" alt="" class="h-2.5	w-2.5">
+        <span>{{ bonAchat.prix }}</span>
+        <span
+            class="grid items-center justify-center h-5 w-5 rounded-full bg-blue"
+        >
+            <img
+                src="../../../assets/images/ancre.svg"
+                alt=""
+                class="h-2.5 w-2.5"
+            />
         </span>
     </div>
 
-    <img src="../../../assets/images/bon-achat.svg" alt="" class="absolute right-0 bottom-0">
+    <img
+        src="../../../assets/images/bon-achat.svg"
+        alt=""
+        class="absolute right-0 bottom-0"
+    />
 </button>

@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.connexionService.login(this.form.value).subscribe({
       next: (res) => {
-        console.log(res);
         this.succeed = true;
         this.router.navigate(["/home"]);
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { bonAchat } from "src/app/model/bonAchat";
 import { v4 as uuidv4 } from "uuid";

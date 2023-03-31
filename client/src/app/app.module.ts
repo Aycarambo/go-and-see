@@ -13,6 +13,7 @@ import { RoundButtonComponent } from "./components/round-button/round-button.com
 import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
 import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { Dashboard } from "./pages/dashboard/dashboard.component";
 import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
 import { PartenaireComponent } from "./components/partenaire/partenaire.component";
@@ -48,6 +49,7 @@ import { AuthGuard } from "./guards/can-access.guard";
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

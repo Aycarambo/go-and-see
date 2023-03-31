@@ -24,7 +24,6 @@ export class CalculDistanceComponent implements OnInit {
   getArene() {
     this.ArenesService.getArenes().subscribe((response: arene[]) => {
       this.arenes = response;
-      console.log(this.arenes);
     });
   }
 

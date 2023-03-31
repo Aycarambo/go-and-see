@@ -43,6 +43,12 @@ export class connexionService {
     });
   }
 
+  updateCredits(userId: number, newCredits: number) {
+    return this.http.put(`${environment.apiUrl}/users/${userId}`, {
+      credits: newCredits,
+    });
+  }
+
   setToken(token: string) {
     this.token = token;
     localStorage.setItem("auth_token", token);
