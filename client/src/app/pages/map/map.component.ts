@@ -46,6 +46,7 @@ export class MapComponent implements OnInit {
       this.initMap(this.user.long, this.user.lat);
       this.initUserMarker(this.user.long, this.user.lat); // Init position joueur à la dernière valeure enregistrée en base
       this.initArenesMarkers();
+      this.initPlayersMarkers();
 
       if (navigator.geolocation) {
         let currentlong, currentLat;
@@ -63,6 +64,7 @@ export class MapComponent implements OnInit {
 
             this.updateUserMarker(currentlong, currentLat);
             this.updateArenesMarkers();
+            this.updatePlayersMarkers();
           });
         }, 1000);
       } else {
