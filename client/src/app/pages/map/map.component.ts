@@ -6,6 +6,8 @@ import { arene } from "src/app/model/arenes";
 import { connexionService } from "src/app/services/connexion.service";
 
 import { environment } from "src/environments/environment";
+import { PlayersService } from "src/app/services/player.service";
+import { joueur } from "src/app/model/joueur";
 
 @Component({
   selector: "app-map",
@@ -19,9 +21,13 @@ export class MapComponent implements AfterViewInit {
   arenes: arene[] = [];
   user: any;
   serverUrl = environment.serverUrl;
+  players: joueur[] = [];
+  private map: mapboxgl.Map;
+  private markers: mapboxgl.Marker[] = [];
 
   constructor(
     private arenesService: ArenesService,
+    private playerService: PlayersService,
     private connexionService: connexionService
   ) {}
 
@@ -29,15 +35,17 @@ export class MapComponent implements AfterViewInit {
     this.connexionService.me().subscribe((user) => {
       this.user = user;
     });
+
+    this.initMap();
   }
 
-  private initMap(): void {
+  initMap(): void {
     if (navigator.geolocation) {
+      //Check si le navigateur autorise la geolocalisation
       navigator.geolocation.getCurrentPosition((position) => {
         this.userLat = position.coords.latitude;
         this.userLong = position.coords.longitude;
-
-        const homeMap = new mapboxgl.Map({
+        this.map = new mapboxgl.Map({
           accessToken:
             "pk.eyJ1IjoiZ2xvcmVsIiwiYSI6ImNsZnYyaGhrMzAwOXYzZ2xpYmdyMTY4eXcifQ.MlyXT1DScZQ2RGqJL1PuIg",
           container: "mapContainer",
@@ -66,7 +74,7 @@ export class MapComponent implements AfterViewInit {
             el.className = "marker-arene";
             new mapboxgl.Marker(el)
               .setLngLat([arene.long, arene.lat])
-              .addTo(homeMap);
+              .addTo(this.map);
           });
         });
 
@@ -77,14 +85,63 @@ export class MapComponent implements AfterViewInit {
         userMarker.className = "marker";
         new mapboxgl.Marker(userMarker)
           .setLngLat([this.userLong, this.userLat])
-          .addTo(homeMap);
+          .addTo(this.map);
       });
     } else {
       alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
     }
   }
+  //affichage des markers (refresh tt les 5 minutes)
+  displayUsers(): void {
+    setInterval(() => {
+      //players markers
+      this.playerService.getPlayersSorted().subscribe((users) => {
+        // Supprimer les anciens marqueurs
+        this.markers.forEach((marker) => marker.remove());
+        this.markers = [];
+        this.players = users;
+        // Ajouter les nouveaux marqueurs
+        //var connectedPlayer = this.connexionService.me()
+        this.players.forEach((player) => {
+          const elUser = document.createElement("div");
+          elUser.className = "marker";
+          /*if(user.id !== connectedPlayer.id){
+            el.className = "marker-adversaire";
+          }
+          else{
+            el.className = "marker";
+          }*/
+          const marker = new mapboxgl.Marker(elUser)
+
+            .setLngLat([player.long, player.lat])
+            .addTo(this.map);
+          //this.players.push(marker);
+        });
+      });
+      //arenas markers
+      this.arenesService.getArenes().subscribe((arenes) => {
+        this.arenes = arenes;
+
+        this.arenes.forEach((arene) => {
+          const el = document.createElement("div");
+          const imgContain = document.createElement("div");
+          const img = document.createElement("img");
+          const p = document.createElement("p");
+          p.textContent = arene.nom;
+          img.src = "assets/images/arene.svg";
+          imgContain.appendChild(img);
+          el.appendChild(imgContain);
+          el.appendChild(p);
+          el.className = "marker-arene";
+          new mapboxgl.Marker(el)
+            .setLngLat([arene.long, arene.lat])
+            .addTo(this.map);
+        });
+      });
+    }, 300); // 5 minutes en millisecondes
+  }
 
   ngAfterViewInit(): void {
-    this.initMap();
+    this.displayUsers();
   }
 }
