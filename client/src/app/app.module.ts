@@ -15,6 +15,7 @@ import { CalculDistanceComponent } from "./components/calculDistance/calculDista
 import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
+import { ArenesComponent } from './pages/arenes/arenes.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AuthGuard } from "./guards/can-access.guard";
     MapComponent,
     CalculDistanceComponent,
     QrcodeComponent,
+    ArenesComponent,
   ],
   imports: [
     BrowserModule,
