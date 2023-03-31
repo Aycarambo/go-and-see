@@ -1,4 +1,9 @@
-<div id="mapContainer"></div>
+<div id="mapContainer">
+    <section class="meteo">
+        <img src={{weatherIcon}} class="meteo--icon">
+    <p class="temperature">{{weatherTemp}} °C</p>
+</section>
+</div>
 
 <a [routerLink]="['/dashboard']" class="absolute bottom-0 w-full">
     <span class="block h-[4px] w-12 bg-white m-auto rounded-full mb-2"></span>

@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class HeaderComponent implements OnInit {
   @Input() backButton: boolean = true;
-  @Input() backUrl: string = "/";
+  @Input() backUrl: string = "/dashboard";
   @Output() backClick = new EventEmitter();
   credits = null;
   points = null;
