@@ -57,6 +57,7 @@ const routes: Routes = [
   {
     path: "selection-arene",
     component: SelectionAreneComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: "**",
