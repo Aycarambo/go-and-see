@@ -13,6 +13,7 @@ import { RoundButtonComponent } from "./components/round-button/round-button.com
 import { MapComponent } from "./pages/map/map.component";
 import { CalculDistanceComponent } from "./components/calculDistance/calculDistance.component";
 import { QrcodeComponent } from "./pages/qrcode/qrcode.component";
+import { Dashboard } from "./pages/dashboard/dashboard.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
 import { ArenesComponent } from './pages/arenes/arenes.component';
@@ -29,6 +30,7 @@ import { ArenesComponent } from './pages/arenes/arenes.component';
     CalculDistanceComponent,
     QrcodeComponent,
     ArenesComponent,
+    Dashboard
   ],
   imports: [
     BrowserModule,

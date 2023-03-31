@@ -30,7 +30,7 @@ const routes: Routes = [
     component: Dashboard,
   },
   {
-    path: "",
+    path: "bons-achats",
     component: BonAchatsComponent,
     canActivate: [AuthGuard],
   },
