@@ -1,0 +1,23 @@
+<a href="{{partenaire.url}}" class="flex flex-row justify-between bg-white w-full p-4 rounded-3xl shadow text-left relative overflow-hidden">
+    <div>
+        <h2 class="headings-sm">
+            {{partenaire.nom}}
+        </h2>
+        <p class="content-sm mt-3">
+            {{partenaire.description}}
+        </p>
+        <p class="text-sm text-blue mt-2">
+            {{partenaire.url}}
+        </p>
+    </div>
+
+    <div class="flex flex-row items-c gap-2 mt-1 shrink-0">
+        <img src="../../../assets/images/icone-loc.svg" alt="" class="h-4 w-4">
+        <span>
+            {{partenaire.ville}}
+        </span>
+        
+    </div>
+
+    <img src="../../../assets/images/bon-achat.svg" alt="" class="absolute right-0 bottom-0">
+</a>
