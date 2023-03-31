@@ -17,6 +17,7 @@ import { Dashboard } from "./pages/dashboard/dashboard.component";
 import { PartenairesComponent } from "./pages/partenaires/partenaires.component";
 import { PartenaireComponent } from "./components/partenaire/partenaire.component";
 import { ArenesComponent } from "./pages/arenes/arenes.component";
+import { ClassementComponent } from "./pages/classement/classement.component";
 
 import { AuthGuard } from "./guards/can-access.guard";
 
@@ -30,6 +31,7 @@ import { AuthGuard } from "./guards/can-access.guard";
     RoundButtonComponent,
     MapComponent,
     CalculDistanceComponent,
+    ClassementComponent,
     QrcodeComponent,
     PartenairesComponent,
     PartenaireComponent,

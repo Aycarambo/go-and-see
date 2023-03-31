@@ -1,0 +1,22 @@
+.classement .grid-classement {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr;
+}
+
+.classement ul > li:last-child {
+  @apply mt-8;
+  @apply pt-4;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    height: 1px;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    background: black;
+    margin: auto;
+    left: 25%;
+  }
+}
