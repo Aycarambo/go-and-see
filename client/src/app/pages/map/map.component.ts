@@ -8,6 +8,7 @@ import { DestinationService } from "src/app/services/destination.service";
 
 import { environment } from "src/environments/environment";
 import { PlayersService } from "src/app/services/player.service";
+import { HttpClient } from "@angular/common/http";
 
 interface markers {
   userMarker: mapboxgl.Marker | null;
@@ -32,12 +33,15 @@ export class MapComponent implements OnInit {
     playersMarkers: [],
   };
   destination: arene;
+  weatherData: any;
+  weatherIcon: any;
 
   constructor(
     private arenesService: ArenesService,
     private playerService: PlayersService,
     private connexionService: connexionService,
-    private data: DestinationService
+    private data: DestinationService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +58,16 @@ export class MapComponent implements OnInit {
           currentlong = position.coords.longitude;
           currentLat = position.coords.latitude;
           this.map.setCenter([currentlong, currentLat]);
+
+          //Météo
+          this.http
+          .get(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${currentLat}&lon=${currentlong}&appid=5c79177aad38a5e1472ed47aa678015d&units=metric`
+          )
+          .subscribe((data) => {
+            this.weatherData = data;
+            this.weatherIcon = this.getWeatherIcon(this.weatherData.weather[0].main);
+          });
         });
 
         setInterval(() => {
@@ -75,6 +89,28 @@ export class MapComponent implements OnInit {
     this.data.currentDestination.subscribe((destination) => {
       this.destination = destination;
     });
+  }
+
+  getWeatherIcon(data: string) {
+    let iconUrl = ""
+    switch (data) {
+      case "Clouds":
+        iconUrl = "../../../assets/images/clouds-icon.svg";
+        break;
+      case "Clear":
+        iconUrl = "../../../assets/images/sun-icon.svg";
+        break;
+      case "Snow":
+        iconUrl = "../../../assets/images/snow-icon.svg";
+        break;
+      case "Rain":
+        iconUrl = "../../../assets/images/rain-icon.svg";
+        break;
+
+      default:
+        break;
+    }
+    return iconUrl;
   }
 
   initUserMarker(long: number, lat: number) {
@@ -189,7 +225,7 @@ export class MapComponent implements OnInit {
       container: "mapContainer",
       style: "mapbox://styles/glorel/clfv2k2sq001001mp4bu1k7a9",
       center: [long, lat],
-      zoom: 10,
+      zoom: 13,
     });
   }
 }
