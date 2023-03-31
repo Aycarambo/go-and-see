@@ -1,62 +1,65 @@
-<a class="w-full h-[60px] bg-[#B7D3F4] block" href=""></a>
-<main class="p-4 rounded-t-3xl bg-white translate-y-[-30px]" style="height: calc(100vh - 40px)">
-   <header class="flex justify-between">
-      <section class="flex gap-4">
-         <a class="rounded-[30px] bg-white shadow-[1px_1px_8px_rgba(0,0,0,0.1)] p-3.5" href=""><img
-               src="./../../../assets/images/cog.svg" alt="logo de parametre"></a>
-         <a class="rounded-[30px] bg-white shadow-[1px_1px_8px_rgba(0,0,0,0.1)] p-3.5" href=""><img
-               src="./../../../assets/images/deconnexion.svg" alt="logo de logout"></a>
-      </section>
-      <section class="flex gap-4">
-         <div class="flex items-center gap-1">
-            <p>1250</p>
-            <img src="./../../../assets/images/point.png" alt="logo des points">
-         </div>
-         <div class="flex items-center gap-1">
-            <p>100</p>
-            <img src="./../../../assets/images/credit.png" alt="logo des credits">
-         </div>
-      </section>
-   </header>
-   <section class="mt-6 mb-6 flex flex-col items-center">
-      <img class="mb-4" src="./../../../assets/images/profil.png" alt="photo de profil">
-      <img src="./../../../assets/images/badge.svg" alt="badge">
-      <h1 class="font-medium text-2xl">Tania Martin</h1>
-      <h2 class="text-[#332FD0]">Marin d’eau douce</h2>
-   </section>
-   <nav>
-      <ul class="flex flex-col gap-2">
-         <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-            <a class="p-4 flex items-center gap-4" href="">
-               <img src="./../../../assets/images/dashboard_classement.png" alt="">
-               <p class="font-normal text-xl	">Classement de saison</p>
-            </a>
-         </li>
-         <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-            <a class="p-4 flex items-center gap-4" href="">
-               <img src="./../../../assets/images/dashboard_classement.png" alt="">
-               <p class="font-normal text-xl	">Status</p>
-            </a>
-         </li>
-         <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-            <a class="p-4 flex items-center gap-4" href="">
-               <img src="./../../../assets/images/dashboard_reduction.png" alt="">
-               <p class="font-normal text-xl	">Bons de réduction</p>
-            </a>
-         </li>
-         <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-            <a class="p-4 flex items-center gap-4" href="">
-               <img src="./../../../assets/images/dashboard_arene.png" alt="">
-               <p class="font-normal text-xl	">Mes Arènes</p>
-            </a>
-         </li>
-         <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
-            <a class="p-4 flex items-center gap-4" href="">
-               <img src="./../../../assets/images/dashboard_arene.png" alt="">
-               <p class="font-normal text-xl	">Déconnexion</p>
-            </a>
-         </li>
-      </ul>
-   </nav>
-   <img class="w-14 mx-auto absolute right-0 left-0 bottom-4" src="./../../../assets/images/logo-icon.png" alt="">
-</main>
+<div class="h-screen flex flex-col">
+    <a [routerLink]="['/home']" class="w-full h-[60px] bg-[#B7D3F4] block"></a>
+    <main class="p-4 pb-8 rounded-t-3xl bg-white h-full flex flex-col mt-[-20px]">
+        <header class="flex justify-between">
+            <section class="flex gap-4">
+                <a class="rounded-[30px] bg-white shadow-[1px_1px_8px_rgba(0,0,0,0.1)] p-3.5" href=""><img
+                        src="./../../../assets/images/cog.svg" alt="logo de parametre"></a>
+                <a class="rounded-[30px] bg-white shadow-[1px_1px_8px_rgba(0,0,0,0.1)] p-3.5" href=""><img
+                        src="./../../../assets/images/deconnexion.svg" alt="logo de logout"></a>
+            </section>
+            <section class="flex gap-4">
+                <div class="flex items-center gap-1">
+                    <p>{{user.points}}</p>
+                    <img src="./../../../assets/images/point.png" alt="logo des points">
+                </div>
+                <div class="flex items-center gap-1">
+                    <p>{{user.credits}}</p>
+                    <img src="./../../../assets/images/credit.png" alt="logo des credits">
+                </div>
+            </section>
+        </header>
+        <section class="mt-6 mb-6 flex flex-col items-center">
+            <img class="mb-4" src={{serverUrl}}{{user.avatar.url}} alt="photo de profil"
+                class="h-[7rem] w-[7rem] object-cover rounded-[2rem] mb-4">
+            <img src="./../../../assets/images/badge.svg" alt="badge">
+            <h1 class="font-medium text-2xl">{{user.username}}</h1>
+            <h2 class="text-[#332FD0]">Marin d’eau douce</h2>
+        </section>
+        <nav>
+            <ul class="flex flex-col gap-2">
+                <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
+                    <a class="p-4 flex items-center gap-4" [routerLink]="['/classement']">
+                        <img src="./../../../assets/images/dashboard_classement.png" alt="">
+                        <p class="font-normal text-xl ">Classement de saison</p>
+                    </a>
+                </li>
+                <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
+                    <a class="p-4 flex items-center gap-4" href="">
+                        <img src="./../../../assets/images/dashboard_classement.png" alt="">
+                        <p class="font-normal text-xl ">Status</p>
+                    </a>
+                </li>
+                <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
+                    <a class="p-4 flex items-center gap-4" [routerLink]="['/bons-achats']">
+                        <img src="./../../../assets/images/dashboard_reduction.png" alt="">
+                        <p class="font-normal text-xl ">Bons de réduction</p>
+                    </a>
+                </li>
+                <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
+                    <a class="p-4 flex items-center gap-4" href="">
+                        <img src="./../../../assets/images/dashboard_arene.png" alt="">
+                        <p class="font-normal text-xl ">Mes Arènes</p>
+                    </a>
+                </li>
+                <li class="border-b border-[#F8F8F8] rounded-3xl shadow-[0px_-2px_24px_rgba(0,0,0,0.05)]">
+                    <button class="p-4 flex items-center gap-4" (click)="onLogout()">
+                        <img src="./../../../assets/images/dashboard_arene.png" alt="">
+                        <p class="font-normal text-xl ">Déconnexion</p>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <img class="w-14 mx-auto mt-auto bottom-4" src="./../../../assets/images/logo-icon.png" alt="">
+    </main>
+</div>

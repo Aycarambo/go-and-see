@@ -3,7 +3,6 @@ import * as mapboxgl from "mapbox-gl";
 
 import { ArenesService } from "src/app/services/arenes.service";
 import { arene } from "src/app/model/arenes";
-import { joueur } from "src/app/model/joueur";
 import { connexionService } from "src/app/services/connexion.service";
 
 import { environment } from "src/environments/environment";
@@ -47,15 +46,23 @@ export class MapComponent implements AfterViewInit {
           zoom: 10,
         });
 
-        const el = document.createElement("div");
-        el.className = "marker";
-        new mapboxgl.Marker(el);
+        // const el = document.createElement("div");
+        // el.className = "marker";
+        // new mapboxgl.Marker(el);
 
         this.arenesService.getArenes().subscribe((arenes) => {
           this.arenes = arenes;
 
           this.arenes.forEach((arene) => {
             const el = document.createElement("div");
+            const imgContain = document.createElement("div");
+            const img = document.createElement("img");
+            const p = document.createElement("p");
+            p.textContent = arene.nom;
+            img.src = "assets/images/arene.svg";
+            imgContain.appendChild(img);
+            el.appendChild(imgContain);
+            el.appendChild(p);
             el.className = "marker-arene";
             new mapboxgl.Marker(el)
               .setLngLat([arene.long, arene.lat])
@@ -64,6 +71,9 @@ export class MapComponent implements AfterViewInit {
         });
 
         const userMarker = document.createElement("div");
+        const img = document.createElement("img");
+        img.src = "assets/images/marker.svg";
+        userMarker.appendChild(img);
         userMarker.className = "marker";
         new mapboxgl.Marker(userMarker)
           .setLngLat([this.userLong, this.userLat])
