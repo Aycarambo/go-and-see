@@ -100,7 +100,7 @@ export class MapComponent implements OnInit {
             this.updateArenesMarkers();
             this.updatePlayersMarkers();
           });
-        }, 1000);
+        }, 2000);
 
         // Pour les besoins de la démo cette fonctionalité a été insérer ici, en cas contraire, elle est supprimé
         // commenter pour sortir du mode test

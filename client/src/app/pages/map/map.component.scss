@@ -6,33 +6,34 @@
   width: 100%;
 }
 
-.meteo{
-    position: absolute;
-width: 70px;
-height: 140px;
-left: 78vw;
-top: 10px;
+.meteo {
+  z-index: 99;
+  position: absolute;
+  width: 70px;
+  height: 140px;
+  left: 78vw;
+  top: 10px;
 
-background: #FFFFFF;
-box-shadow: 0px -2px 24px rgba(0, 0, 0, 0.1);
-border-radius: 38px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
+  background: #ffffff;
+  box-shadow: 0px -2px 24px rgba(0, 0, 0, 0.1);
+  border-radius: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.temperature{
-    background-color:#0043C6 ;
-    border-radius: 100px;
-    color:white;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.temperature {
+  background-color: #0043c6;
+  border-radius: 100px;
+  color: white;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.meteo--icon{
-    height: 60px;
+.meteo--icon {
+  height: 60px;
 }
